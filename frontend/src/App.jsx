@@ -1,10 +1,4 @@
-import { useState } from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./App.css";
 import { Navbar } from "./components/Navbar/Navbar";
@@ -13,6 +7,7 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { FeedPage } from "./pages/Feed/FeedPage";
 
+// docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
   {
     path: "/",
