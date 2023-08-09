@@ -11,11 +11,15 @@ export const FeedPage = () => {
 
   useEffect(() => {
     if (token) {
-      getPosts(token).then((data) => {
-        setPosts(data.posts);
-        setToken(data.token);
-        window.localStorage.setItem("token", data.token);
-      });
+      getPosts(token)
+        .then((data) => {
+          setPosts(data.posts);
+          setToken(data.token);
+          window.localStorage.setItem("token", data.token);
+        })
+        .catch((err) => {
+          console.err(err);
+        });
     } else {
       navigate("/login");
     }

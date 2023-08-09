@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const connectToDatabase = () => {
-  const mongoDbUrl = process.env.MONGO_URL;
+const connectToDatabase = async (url) => {
+  const mongoDbUrl = url || process.env.MONGO_URL;
 
   if (!mongoDbUrl) {
     console.error(
@@ -10,16 +10,10 @@ const connectToDatabase = () => {
     throw new Error("No connection string provided");
   }
 
-  mongoose.connect(mongoDbUrl);
-  const db = mongoose.connection;
-
-  db.on("error", (err) => {
-    console.error(err);
-  });
-
-  db.on("open", () => {
+  await mongoose.connect(mongoDbUrl);
+  if (process.env.NODE_ENV !== "test") {
     console.log("Successfully connected to MongoDB");
-  });
+  }
 };
 
 module.exports = { connectToDatabase };

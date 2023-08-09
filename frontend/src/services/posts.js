@@ -8,6 +8,10 @@ export const getPosts = async (token) => {
     },
   });
 
+  if (response.status !== 200) {
+    throw new Error("Unable to fetch posts");
+  }
+
   const data = response.json();
   return data;
 };
