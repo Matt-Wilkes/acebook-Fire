@@ -1,4 +1,4 @@
-const supertest = require("supertest");
+const request = require("supertest");
 const JWT = require("jsonwebtoken");
 
 const app = require("../../app");
@@ -41,8 +41,7 @@ describe("/posts", () => {
 
   describe("POST, when a valid token is present", () => {
     test("responds with a 201", async () => {
-      const testApp = supertest(app);
-      const response = await testApp
+      const response = await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({ message: "Hello World!" });
@@ -50,8 +49,7 @@ describe("/posts", () => {
     });
 
     test("creates a new post", async () => {
-      const testApp = supertest(app);
-      await testApp
+      await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({ message: "Hello World!!" });
@@ -62,7 +60,7 @@ describe("/posts", () => {
     });
 
     test("returns a new token", async () => {
-      const testApp = supertest(app);
+      const testApp = request(app);
       const response = await testApp
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
@@ -79,8 +77,7 @@ describe("/posts", () => {
 
   describe("POST, when token is missing", () => {
     test("responds with a 401", async () => {
-      const testApp = supertest(app);
-      const response = await testApp
+      const response = await request(app)
         .post("/posts")
         .send({ message: "hello again world" });
 
@@ -88,8 +85,7 @@ describe("/posts", () => {
     });
 
     test("a post is not created", async () => {
-      const testApp = supertest(app);
-      const response = await testApp
+      const response = await request(app)
         .post("/posts")
         .send({ message: "hello again world" });
 
@@ -98,8 +94,7 @@ describe("/posts", () => {
     });
 
     test("a token is not returned", async () => {
-      const testApp = supertest(app);
-      const response = await testApp
+      const response = await request(app)
         .post("/posts")
         .send({ message: "hello again world" });
 
@@ -114,8 +109,7 @@ describe("/posts", () => {
       await post1.save();
       await post2.save();
 
-      const testApp = supertest(app);
-      const response = await testApp
+      const response = await request(app)
         .get("/posts")
         .set("Authorization", `Bearer ${token}`);
 
@@ -128,8 +122,7 @@ describe("/posts", () => {
       await post1.save();
       await post2.save();
 
-      const testApp = supertest(app);
-      const response = await testApp
+      const response = await request(app)
         .get("/posts")
         .set("Authorization", `Bearer ${token}`);
 
@@ -147,8 +140,7 @@ describe("/posts", () => {
       await post1.save();
       await post2.save();
 
-      const testApp = supertest(app);
-      const response = await testApp
+      const response = await request(app)
         .get("/posts")
         .set("Authorization", `Bearer ${token}`);
 
@@ -168,8 +160,7 @@ describe("/posts", () => {
       await post1.save();
       await post2.save();
 
-      const testApp = supertest(app);
-      const response = await testApp.get("/posts");
+      const response = await request(app).get("/posts");
 
       expect(response.status).toEqual(401);
     });
@@ -180,8 +171,7 @@ describe("/posts", () => {
       await post1.save();
       await post2.save();
 
-      const testApp = supertest(app);
-      const response = await testApp.get("/posts");
+      const response = await request(app).get("/posts");
 
       expect(response.body.posts).toEqual(undefined);
     });
@@ -192,8 +182,7 @@ describe("/posts", () => {
       await post1.save();
       await post2.save();
 
-      const testApp = supertest(app);
-      const response = await testApp.get("/posts");
+      const response = await request(app).get("/posts");
 
       expect(response.body.token).toEqual(undefined);
     });

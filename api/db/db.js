@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
-const connectToDatabase = async (url) => {
-  const mongoDbUrl = url || process.env.MONGO_URL;
+const connectToDatabase = async () => {
+  const mongoDbUrl = process.env.MONGODB_URL;
 
   if (!mongoDbUrl) {
     console.error(
-      "No MongoDB url provided. Make sure there is a MONGO_URL environment variable set. See the readme for more details."
+      "No MongoDB url provided. Make sure there is a MONGO_URL environment variable set. See the README for more details."
     );
     throw new Error("No connection string provided");
   }
