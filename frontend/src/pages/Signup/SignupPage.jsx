@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { signup } from "../../services/signup";
+import { signup } from "../../services/authentication";
 
 export const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ export const SignupPage = () => {
     try {
       await signup(email, password);
       console.log("redirecting...:");
-      navigate("/posts");
+      navigate("/login");
     } catch (err) {
       console.error(err);
       navigate("/signup");
@@ -32,13 +32,14 @@ export const SignupPage = () => {
     <>
       <h2>Signup</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email:</label>
         <input
-          placeholder="Email"
           id="email"
           type="text"
           value={email}
           onChange={handleEmailChange}
         />
+        <label htmlFor="password">Password:</label>
         <input
           placeholder="Password"
           id="password"
