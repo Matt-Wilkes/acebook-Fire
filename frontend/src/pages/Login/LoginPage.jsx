@@ -32,15 +32,15 @@ export const LoginPage = () => {
     <>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email:</label>
         <input
-          placeholder="Email"
           id="email"
           type="text"
           value={email}
           onChange={handleEmailChange}
         />
+        <label htmlFor="password">Password:</label>
         <input
-          placeholder="Password"
           id="password"
           type="password"
           value={password}
