@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" data-name="Layer 1">
+  <defs>
+    <style>.cls-1{fill:#010101;}</style>
+  </defs>
+  <title>logo</title>
+  <g class="layer">
+    <title>Layer 1</title>
+    <polygon class="cls-1" id="svg_1" points="60.69,40.52 1.69,1.52 1.69,118.52 118.69,118.52 118.69,1.52 60.69,40.52 " transform="rotate(-180 60 60)"/>
+  </g>
+</svg>

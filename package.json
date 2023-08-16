@@ -1,0 +1,15 @@
+{
+  "Note": "This is a dummy package.json file to prevent accidental installation or running of packages in the wrong file",
+  "scripts": {
+    "dev": "echo 'You are in the wrong directory. cd to api or frontend folder to run this command'",
+    "start": "echo 'You are in the wrong directory. cd to api or frontend folder to run this command'",
+    "build": "echo 'You are in the wrong directory. cd to api or frontend folder to run this command'",
+    "lint": "echo 'You are in the wrong directory. cd to api or frontend folder to run this command'",
+    "preview": "echo 'You are in the wrong directory. cd to api or frontend folder to run this command'",
+    "test": "echo 'You are in the wrong directory. cd to api or frontend folder to run this command'",
+    "preinstall": "echo \"You are in the wrong directory. cd to api or frontend folder to run this command\" && exit 1"
+  },
+  "engines": {
+    "npm": "YOU ARE IN THE WRONG DIRECTORY! cd to api or frontend folder to run this command"
+  }
+}

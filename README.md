@@ -93,6 +93,8 @@ NODE_ENV="development"
 JWT_SECRET="secret"
 ```
 
+For an explanation of these environment variables, see the documentation.
+
 ### How to run the server and use the app (as a human)
 
 1. Start the server application (in the `api` directory)
