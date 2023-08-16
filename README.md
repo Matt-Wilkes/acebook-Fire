@@ -17,9 +17,9 @@ run separately.
 ### Documentation
 
 [More documentation of the codebase and its architecture can be found here.](./DOCUMENTATION.md)
-It's recommended you all read this _after making sure the whole setup below
-worked for everyone_. Then work together on a diagram describing how the
-application works.
+It's recommended you all read the suggested docs _after making sure the whole
+setup below worked for everyone_. Then work together on a diagram describing how
+the application works.
 
 ### Card wall
 
@@ -95,16 +95,14 @@ JWT_SECRET="secret"
 
 For an explanation of these environment variables, see the documentation.
 
-### How to run the server and use the app (as a human)
+### How to run the server and use the app
 
 1. Start the server application (in the `api` directory)
 
-   **Note the use of an environment variable for the JWT secret**
-
-   ```
-   ; cd api
-   ; npm start
-   ```
+```
+; cd api
+; npm start
+```
 
 2. Start the front end application (in the `frontend` directory)
 
@@ -123,9 +121,3 @@ Then, after signing up, you should be able to log in by going to
 
 After logging in, you won't see much but you can create posts using PostMan and
 they should then show up in the browser if you refresh the page.
-
-## Environment Variables
-
-## A Note on Modules
-
-## Accessibility
