@@ -2,18 +2,20 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const login = async (email, password) => {
+  const payload = {
+    email: email,
+    password: password,
+  };
+
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
+    body: JSON.stringify(payload),
   };
 
-  let response = await fetch(`${BACKEND_URL}/tokens`, requestOptions);
+  const response = await fetch(`${BACKEND_URL}/tokens`, requestOptions);
 
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
@@ -27,15 +29,17 @@ export const login = async (email, password) => {
 };
 
 export const signup = async (email, password) => {
+  const payload = {
+    email: email,
+    password: password,
+  };
+
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
+    body: JSON.stringify(payload),
   };
 
   let response = await fetch(`${BACKEND_URL}/users`, requestOptions);

@@ -29,8 +29,8 @@ app.use((_req, res) => {
 
 // Error handler
 app.use((err, _req, res, _next) => {
+  console.error(err);
   if (process.env.NODE_ENV === "development") {
-    console.error(err);
     res.status(500).send(err.message);
   } else {
     res.status(500).json({ err: "Something went wrong" });

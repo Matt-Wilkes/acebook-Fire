@@ -1,20 +1,22 @@
 # Documentation
 
 This repo contains some documentation to help you understand how this project
-works, which can be found in the `docs` folder. We recommend you look through
-the suggested docs below together. You do not need to read all of the reference
-docs, but they can be useful if you come across something in the project you
-don't understand.
+works, which can be found in the `docs` folder.
 
-## Suggested:
+## Suggested Docs:
+
+We recommend you look through these docs together.
 
 | Title                                                | Summary                        |
 | ---------------------------------------------------- | ------------------------------ |
 | [Full-Stack Overview](./docs/full-stack_overview.md) | Frontend/Backend communication |
 | [Authentication](./docs/authentication.md)           | JSON Web Tokens                |
-| [Accessibility](./docs/modules.md) (TODO)            | Writing inclusive Web Pages    |
+| [Accessibility](./docs/accessibility.md) (TODO)      | Writing inclusive Web Pages    |
 
-## Reference:
+## Reference Docs:
+
+You do not need to read all of these docs, but they can be useful if you
+come across something in the project you don't understand.
 
 | Title                                                     | Summary                                       |
 | --------------------------------------------------------- | --------------------------------------------- |

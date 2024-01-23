@@ -55,6 +55,9 @@ const MyClass = require("./path/to/other/file.js");
 
 ### Exporting multiple values:
 
+We can export multiple values by collecting them together into an object, and
+exporting that.
+
 ```js
 module.exports = {
   MyFirstClass: MyFirstClass,
