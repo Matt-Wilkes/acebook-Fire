@@ -88,7 +88,7 @@ VITE_BACKEND_URL="http://localhost:3000"
 Create a file `api/.env` with the following contents:
 
 ```
-MONGO_URL="mongodb://0.0.0.0/acebook"
+MONGODB_URL="mongodb://0.0.0.0/acebook"
 NODE_ENV="development"
 JWT_SECRET="secret"
 ```
@@ -110,7 +110,7 @@ In a new terminal session...
 
 ```
 ; cd frontend
-; npm start
+; npm dev
 ```
 
 You should now be able to open your browser and go to
