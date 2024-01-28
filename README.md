@@ -97,11 +97,11 @@ For an explanation of these environment variables, see the documentation.
 
 ### How to run the server and use the app
 
-1. Start the server application (in the `api` directory)
+1. Start the server application (in the `api` directory) in dev mode:
 
 ```
 ; cd api
-; npm start
+; npm run dev
 ```
 
 2. Start the front end application (in the `frontend` directory)
@@ -110,7 +110,7 @@ In a new terminal session...
 
 ```
 ; cd frontend
-; npm dev
+; npm run dev
 ```
 
 You should now be able to open your browser and go to

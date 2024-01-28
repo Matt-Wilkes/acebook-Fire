@@ -19,7 +19,7 @@ implemented authentication yet, that's not going to impede you right now.
    the backend).
 7. When the user logs out, the front end discards the token.
 
-![authentication flow diagram](./diagrams/auth_flow.png)
+![diagram of the above authentication flow](./diagrams/auth_flow.png)
 
 ## What is a JSON Web Token?
 

@@ -111,13 +111,13 @@ And the body of the response would look like this.
 ```
 
 Here's a diagram of the above <br> <br>
-![a diagram of client/server applications](./diagrams/project_communication.png)
+![a diagram of the client/server application with the client making a request to the server and receiving a response](./diagrams/project_communication.png)
 <br> <br>
 
 Once received by the React FE, the JSON in the response body is used to render a
 list of posts on the page.
 
-![response body mapped onto a page](./diagrams/response_parsing.png)
+![response body mapped onto a page with the message of each post being displayed on a new line](./diagrams/response_parsing.png)
 
 This architectural pattern is has a number of advantages. For example, it allows
 teams to build multiple front ends, all of which use the same backend API. You
