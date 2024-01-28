@@ -1,6 +1,4 @@
-const JWT = require("jsonwebtoken");
-
-const generateToken = require("../../lib/token");
+const { generateToken, decodeToken } = require("../../lib/token");
 
 describe("TokenGenerator", () => {
   describe("jsonwebtoken", () => {
@@ -9,13 +7,13 @@ describe("TokenGenerator", () => {
       const id_2 = 2;
 
       // Encode tokens
-      const token_1 = generateToken(user_id);
-      const token_2 = generateToken(user_id);
+      const token_1 = generateToken(id_1);
+      const token_2 = generateToken(id_2);
       expect(token_1).not.toEqual(token_2);
 
       // Decode tokens
-      const payload_1 = decode_token(token_1);
-      const payload_2 = decode_token(token_2);
+      const payload_1 = decodeToken(token_1);
+      const payload_2 = decodeToken(token_2);
 
       expect(payload_1.user_id).toEqual(id_1);
       expect(payload_2.user_id).toEqual(id_2);

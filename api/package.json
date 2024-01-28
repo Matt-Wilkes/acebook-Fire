@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "node --watch index.js",
     "test": "jest"
   },
   "author": "Makers Academy",
@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "jest": "^29.6.2",
-    "nodemon": "^3.0.1",
     "supertest": "^6.3.3"
   }
 }

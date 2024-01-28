@@ -1,5 +1,5 @@
 const Post = require("../models/post");
-const generateToken = require("../lib/generateToken");
+const { generateToken } = require("../lib/token");
 
 const getAllPosts = async (req, res) => {
   const posts = await Post.find();
