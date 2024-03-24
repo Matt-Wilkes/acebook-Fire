@@ -18,4 +18,13 @@ module.exports = {
     ],
     "react/prop-types": "off",
   },
+  // Test Settings
+  overrides: [
+    {
+      env: { jest: true },
+      files: ["tests/**"],
+      plugins: ["vitest"],
+      extends: ["plugin:vitest/recommended"],
+    },
+  ],
 };

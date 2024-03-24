@@ -12,7 +12,7 @@ const createPost = async (req, res) => {
   post.save();
 
   const newToken = generateToken(req.user_id);
-  res.status(201).json({ message: "OK", token: newToken });
+  res.status(201).json({ message: "Post created", token: newToken });
 };
 
 const PostsController = {

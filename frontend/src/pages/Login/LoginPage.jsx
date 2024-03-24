@@ -12,7 +12,7 @@ export const LoginPage = () => {
     event.preventDefault();
     try {
       const token = await login(email, password);
-      window.localStorage.setItem("token", token);
+      localStorage.setItem("token", token);
       navigate("/posts");
     } catch (err) {
       console.error(err);

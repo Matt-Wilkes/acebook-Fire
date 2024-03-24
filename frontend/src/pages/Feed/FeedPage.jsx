@@ -6,26 +6,25 @@ import Post from "../../components/Post/Post";
 
 export const FeedPage = () => {
   const [posts, setPosts] = useState([]);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     if (token) {
       getPosts(token)
         .then((data) => {
           setPosts(data.posts);
-          setToken(data.token);
-          window.localStorage.setItem("token", data.token);
+          localStorage.setItem("token", data.token);
         })
         .catch((err) => {
           console.err(err);
         });
-    } else {
-      navigate("/login");
     }
-  });
+  }, []);
 
+  const token = localStorage.getItem("token");
   if (!token) {
+    navigate("/login");
     return;
   }
 
