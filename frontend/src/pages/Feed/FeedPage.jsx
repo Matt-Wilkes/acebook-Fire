@@ -17,10 +17,11 @@ export const FeedPage = () => {
           localStorage.setItem("token", data.token);
         })
         .catch((err) => {
-          console.err(err);
+          console.error(err);
+          navigate("/login");
         });
     }
-  }, []);
+  }, [navigate]);
 
   const token = localStorage.getItem("token");
   if (!token) {
