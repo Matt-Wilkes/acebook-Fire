@@ -20,8 +20,6 @@ export const login = async (email, password) => {
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
     let data = await response.json();
-    // (aivocode) Check what was fetched from API:
-    console.log(data);
     return data.token;
   } else {
     throw new Error(
