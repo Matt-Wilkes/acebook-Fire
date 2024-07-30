@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { login } from "../../services/authentication";
 
@@ -7,6 +7,7 @@ export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,6 +31,7 @@ export const LoginPage = () => {
 
   return (
     <>
+      <div>{state}</div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
