@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import Context from "../../components/Context/Context";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import { login } from "../../services/authentication";
 
 export const LoginPage = () => {
@@ -8,11 +8,13 @@ export const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { state } = useLocation();
+  const { authStatus, setAuthStatus } = useContext(Context);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const token = await login(email, password);
+      setAuthStatus(true);
       localStorage.setItem("token", token);
       navigate("/posts");
     } catch (err) {
@@ -31,7 +33,6 @@ export const LoginPage = () => {
 
   return (
     <>
-      <div>{state}</div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>

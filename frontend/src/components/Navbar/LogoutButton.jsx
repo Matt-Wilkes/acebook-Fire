@@ -1,11 +1,15 @@
+import { useContext } from "react";
+import Context from "../Context/Context";
 import { useNavigate } from "react-router-dom";
 
 const LogoutButton = () => {
   const navigate = useNavigate();
+  const { authStatus, setAuthStatus } = useContext(Context);
 
   const Logout = () => {
+    setAuthStatus(false);
     localStorage.removeItem("token");
-    navigate("/login", { state: "You were logged out" });
+    navigate("/", { state: "You were logged out" });
   };
 
   return <button onClick={Logout}>Logout</button>;
