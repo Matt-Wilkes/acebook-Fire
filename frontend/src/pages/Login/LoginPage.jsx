@@ -1,13 +1,15 @@
-import { useState, useContext } from "react";
-import Context from "../../components/Context/Context";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authentication";
+
+import { useContext } from "react";
+import Context from "../../components/Context/Context";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { state } = useLocation();
+
   const { authStatus, setAuthStatus } = useContext(Context);
 
   const handleSubmit = async (event) => {

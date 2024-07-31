@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 const LogoutButton = () => {
   const navigate = useNavigate();
   const { authStatus, setAuthStatus } = useContext(Context);
-
   const Logout = () => {
     setAuthStatus(false);
     localStorage.removeItem("token");
