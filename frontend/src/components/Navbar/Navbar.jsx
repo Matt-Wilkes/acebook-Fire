@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav style={{ background: "LightGray" }}>
+      <nav data-testid="_nav" style={{ background: "LightGray" }}>
         {!authStatus && (
           <>
             <Link to="/">| Home | </Link>
