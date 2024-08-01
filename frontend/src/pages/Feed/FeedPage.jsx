@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { getPosts } from "../../services/posts";
 import Post from "../../components/Post/Post";
+import LogoutButton from "../../components/Navbar/LogoutButton";
+import CreatePost from "../CreatePost/CreatePost";
 
 export const FeedPage = () => {
   const [posts, setPosts] = useState([]);
@@ -31,6 +33,8 @@ export const FeedPage = () => {
 
   return (
     <>
+      <LogoutButton />
+      <CreatePost/>
       <h2>Posts</h2>
       <div className="feed" role="feed">
         {posts.map((post) => (
