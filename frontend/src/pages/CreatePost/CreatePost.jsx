@@ -1,5 +1,5 @@
-import { useState, handleSubmit } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { useState } from "react";
+import { useNavigate} from "react-router-dom";
 // import PostsController from "../../../../api/controllers/posts"
 import { createPost } from "../../services/posts";
 import "./CreatePost.css";
@@ -14,14 +14,12 @@ export const CreatePost = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     const token = localStorage.getItem("token");
     if (token){try {
       await createPost(token, post);
       console.log(token)
       console.log(post);
-      navigate("/posts");
     } catch (err) {
       console.error(err);
       navigate("/posts");
@@ -32,7 +30,7 @@ export const CreatePost = () => {
     <div className="create-post">
       <h1>Create New Post Here</h1>
       <form onSubmit={handleSubmit}>
-      <label htmlFor="create post ">Create Post</label>
+      <label htmlFor="create-post">Create Post</label>
       <input
         id="create-post"
         type="text"
