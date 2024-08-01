@@ -8,17 +8,17 @@ const Navbar = () => {
 
   return (
     <>
-      <nav style={{ background: "LightGray" }}>
+      <nav data-testid="_nav" style={{ background: "LightGray" }}>
         {!authStatus && (
           <>
-            <Link to="/">| Home | </Link>
-            <Link to="/login"> Login | </Link>
-            <Link to="/signup">Signup |</Link>
+            <Link data-testid="_home" to="/">| Home | </Link>
+            <Link data-testid="_login" to="/login"> Login | </Link>
+            <Link data-testid="_signup" to="/signup">Signup |</Link>
           </>
         )}
         {authStatus && (
           <>
-            <Link to="/posts">| Posts | </Link>
+            <Link data-testid="_posts" to="/posts">| Posts | </Link>
             <LogoutButton />
           </>
         )}

@@ -11,7 +11,7 @@ const LogoutButton = () => {
     navigate("/", { state: "You were logged out" });
   };
 
-  return <button onClick={Logout}>Logout</button>;
+  return <button data-testid="_logout" onClick={Logout}>Logout</button>;
 };
 
 export default LogoutButton;

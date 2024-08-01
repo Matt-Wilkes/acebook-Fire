@@ -124,3 +124,6 @@ they should then show up in the browser if you refresh the page.
 
 
 ## Adding lines and pushing to check connection to remote repo - Maz
+
+### Dependencies
+npm install --save-dev @testing-library/jest-dom
