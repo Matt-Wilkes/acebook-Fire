@@ -18,12 +18,13 @@ export const CreatePost = () => {
     const token = localStorage.getItem("token");
     if (token){try {
       await createPost(token, post);
-      console.log(token)
-      console.log(post);
     } catch (err) {
       console.error(err);
       navigate("/posts");
-    }}
+    }
+    console.log(post);
+    console.log(token);
+  }
   };
 
   return (
