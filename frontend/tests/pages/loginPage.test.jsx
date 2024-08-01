@@ -7,6 +7,8 @@ import { login } from "../../src/services/authentication";
 
 import { LoginPage } from "../../src/pages/Login/LoginPage";
 
+import Context from "../../src/components/Context/Context";
+
 // Mocking React Router's useNavigate function
 vi.mock("react-router-dom", () => {
   const navigateMock = vi.fn();
@@ -39,7 +41,15 @@ describe("Login Page", () => {
   });
 
   test("allows a user to login", async () => {
-    render(<LoginPage />);
+    let authStatus = false;
+    function setAuthStatus(newValue) {
+      authStatus = newValue;
+    }
+    render(
+      <Context.Provider value={{ authStatus, setAuthStatus }}>
+        <LoginPage />
+      </Context.Provider>
+    );
 
     await completeLoginForm();
 
@@ -47,7 +57,15 @@ describe("Login Page", () => {
   });
 
   test("navigates to /posts on successful login", async () => {
-    render(<LoginPage />);
+    let authStatus = false;
+    function setAuthStatus(newValue) {
+      authStatus = newValue;
+    }
+    render(
+      <Context.Provider value={{ authStatus, setAuthStatus }}>
+        <LoginPage />
+      </Context.Provider>
+    );
 
     login.mockResolvedValue("secrettoken123");
     const navigateMock = useNavigate();
@@ -58,7 +76,15 @@ describe("Login Page", () => {
   });
 
   test("navigates to /login on unsuccessful login", async () => {
-    render(<LoginPage />);
+    let authStatus = false;
+    function setAuthStatus(newValue) {
+      authStatus = newValue;
+    }
+    render(
+      <Context.Provider value={{ authStatus, setAuthStatus }}>
+        <LoginPage />
+      </Context.Provider>
+    );
 
     login.mockRejectedValue(new Error("Error logging in"));
     const navigateMock = useNavigate();

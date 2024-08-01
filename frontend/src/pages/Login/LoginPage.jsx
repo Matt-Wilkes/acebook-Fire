@@ -1,18 +1,22 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authentication";
+
+import { useContext } from "react";
+import Context from "../../components/Context/Context";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { state } = useLocation();
+
+  const { authStatus, setAuthStatus } = useContext(Context);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const token = await login(email, password);
+      setAuthStatus(true);
       localStorage.setItem("token", token);
       navigate("/posts");
     } catch (err) {
@@ -31,7 +35,6 @@ export const LoginPage = () => {
 
   return (
     <>
-      <div>{state}</div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
