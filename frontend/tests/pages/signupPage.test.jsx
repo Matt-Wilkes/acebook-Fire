@@ -24,12 +24,18 @@ vi.mock("../../src/services/authentication", () => {
 const completeSignupForm = async () => {
   const user = userEvent.setup();
 
-  const emailInputEl = screen.getByLabelText("Email:");
-  const passwordInputEl = screen.getByLabelText("Password:");
+  const firstNameInputEl = screen.getByLabelText("firstName:");
+  const lastNameInputEl = screen.getByLabelText("lastName:");
+  const emailInputEl = screen.getByLabelText("email:");
+  const passwordInputEl = screen.getByLabelText("password:");
+  const confirmPasswordInputEl = screen.getByLabelText("confirmPassword:");
   const submitButtonEl = screen.getByRole("submit-button");
 
+  await user.type(firstNameInputEl, "john");
+  await user.type(lastNameInputEl, "smith");
   await user.type(emailInputEl, "test@email.com");
   await user.type(passwordInputEl, "1234");
+  await user.type(confirmPasswordInputEl, "1234");
   await user.click(submitButtonEl);
 };
 
@@ -43,7 +49,7 @@ describe("Signup Page", () => {
 
     await completeSignupForm();
 
-    expect(signup).toHaveBeenCalledWith("test@email.com", "1234");
+    expect(signup).toHaveBeenCalledWith("john", "smith", "test@email.com", "1234", "1234");
   });
 
   test("navigates to /login on successful signup", async () => {
