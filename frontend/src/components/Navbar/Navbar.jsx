@@ -18,6 +18,7 @@ const Navbar = () => {
         )}
         {authStatus && (
           <>
+            <Link data-testid="_my-profile" to="/my-profile">| My Profile | </Link>
             <Link data-testid="_posts" to="/posts">| Posts | </Link>
             <LogoutButton />
           </>
