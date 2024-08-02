@@ -1,29 +1,29 @@
 import { useState } from "react";
 import { useNavigate} from "react-router-dom";
-// import PostsController from "../../../../api/controllers/posts"
 import { createPost } from "../../services/posts";
+import { jwtDecode } from "jwt-decode";
 import "./CreatePost.css";
 
 
-export const CreatePost = () => {
+export const CreatePost = (props) => {
   const [post, setPost] = useState("");
   const handlePostChange = (event) => {
-    console.log(event);
     setPost(event.target.value);
   };
 
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const token = localStorage.getItem("token");
     if (token){try {
-      await createPost(token, post);
+      await createPost(token, `${post} was created by ${jwtDecode(token).user_id}`);
+      navigate("/posts");
+      props.fetchPosts();
     } catch (err) {
       console.error(err);
-      navigate("/posts");
+      // navigate("/posts");
     }
-    console.log(post);
-    console.log(token);
   }
   };
 
