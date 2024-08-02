@@ -36,6 +36,7 @@ export const CreatePost = (props) => {
       <label htmlFor="create-post">Create Post</label>
       <input
         id="create-post"
+        data-testid="tcreate-post"
         type="text"
         value={post}
         onChange={handlePostChange}
