@@ -7,6 +7,7 @@ import "./CreatePost.css";
 
 export const CreatePost = (props) => {
   const [post, setPost] = useState("");
+  
   const handlePostChange = (event) => {
     setPost(event.target.value);
   };
@@ -16,8 +17,9 @@ export const CreatePost = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
+    const userId = jwtDecode(token).user_id;
     if (token){try {
-      await createPost(token, `${post} was created by ${jwtDecode(token).user_id}`);
+      await createPost(token, post);
       navigate("/posts");
       props.fetchPosts();
     } catch (err) {
@@ -44,7 +46,7 @@ export const CreatePost = (props) => {
       />
       </form>
       
-      {/* <Link to="/logout">Log Out</Link> */}
+    
     </div>
   );
 };
