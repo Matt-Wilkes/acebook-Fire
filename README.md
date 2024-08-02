@@ -125,5 +125,6 @@ they should then show up in the browser if you refresh the page.
 
 ## Adding lines and pushing to check connection to remote repo - Maz
 
-### Dependencies
+### Frontend Dependencies
 npm install --save-dev @testing-library/jest-dom
+npm install jwt-decode
