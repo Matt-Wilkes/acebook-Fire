@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./App.css";
 import { HomePage } from "./pages/Home/HomePage";
@@ -44,6 +44,12 @@ const router = createBrowserRouter([
 
 const App = () => {
   const [authStatus, setAuthStatus] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setAuthStatus(!!token);
+  }, []);
+
   return (
     <Context.Provider value={{ authStatus, setAuthStatus }}>
       <RouterProvider router={router} />
