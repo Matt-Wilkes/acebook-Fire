@@ -7,9 +7,9 @@ export const getUser = async (user_id) => {
       user_id: user_id,
     },
   };
-  
+
   const response = await fetch(`${BACKEND_URL}/users/get-user`, requestOptions);
-  console.log(response.status);
+  console.log("getUser response status: " + response.status);
   if (response.status !== 200) {
     throw new Error("No such user received from API");
   }

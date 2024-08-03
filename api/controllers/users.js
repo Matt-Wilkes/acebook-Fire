@@ -14,6 +14,8 @@ const create = (req, res) => {
     email,
     password,
     confirmPassword,
+    city: "No city added",
+    bio: "No bio added",
   });
   user
     .save()
@@ -28,10 +30,17 @@ const create = (req, res) => {
 };
 
 const findUserById = async (req, res) => {
-  console.log(req.headers.user_id); // <-- this is what comes from frontend user_id extracted from JWT token
+  // console.log(req.headers.user_id); // <-- this is what comes from frontend (user_id extracted from JWT token)
   const user = await User.find({ _id: req.headers.user_id });
-  // const user = await User.find({"_id" : ObjectId(req.user_id)});
-  res.status(200).json({ user: user });
+  console.log(user[0]);
+  res.status(200).json({
+    user_id: user[0]["_id"].toString(),
+    firstName: user[0]["firstName"],
+    lastName: user[0]["lastName"],
+    email: user[0]["email"],
+    city: user[0]["city"],
+    bio: user[0]["bio"],
+  });
 };
 
 const UsersController = {
