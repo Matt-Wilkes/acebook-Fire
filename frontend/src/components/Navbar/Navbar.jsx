@@ -15,7 +15,14 @@ const Navbar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar data-testid="_nav" position="static" color="transparent">
+      <AppBar
+        data-testid="_nav"
+        position="static"
+        color="transparent"
+        sx={{
+          width: "100vw",
+        }}
+      >
         <Toolbar>
           <Typography component={Link} to="/" color="inherit" variant="h6">
             &#x1F525;cebook

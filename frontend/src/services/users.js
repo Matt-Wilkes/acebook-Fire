@@ -17,3 +17,7 @@ export const getUser = async (user_id) => {
   const data = await response.json();
   return data;
 };
+
+export const updateUser = async (formData) => {
+  console.log(formData);
+};
