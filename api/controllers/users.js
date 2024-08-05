@@ -31,21 +31,48 @@ const create = (req, res) => {
 
 const findUserById = async (req, res) => {
   // console.log(req.headers.user_id); // <-- this is what comes from frontend (user_id extracted from JWT token)
-  const user = await User.find({ _id: req.headers.user_id });
-  console.log(user[0]);
+  const user = await User.findOne({ _id: req.headers.user_id });
+  // console.log(user);
   res.status(200).json({
-    user_id: user[0]["_id"].toString(),
-    firstName: user[0]["firstName"],
-    lastName: user[0]["lastName"],
-    email: user[0]["email"],
-    city: user[0]["city"],
-    bio: user[0]["bio"],
+    user_id: user["_id"].toString(),
+    firstName: user["firstName"],
+    lastName: user["lastName"],
+    email: user["email"],
+    city: user["city"],
+    bio: user["bio"],
   });
+};
+
+const updateUserById = async (req, res) => {
+  // console.log(req.body);
+  if (!req.body.city) {
+    req.body.city = "No city added"
+  }
+  if (!req.body.bio) {
+    req.body.bio = "No bio added"
+  }
+
+  await User.findOneAndUpdate(
+    { _id: req.body.user_id },
+    {
+      $set: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        city: req.body.city,
+        bio: req.body.bio,
+      },
+    },
+    { new: false }
+  );
+
+  res.status(200).json({ message: "Profile updated" });
+
 };
 
 const UsersController = {
   create: create,
   findUserById: findUserById,
+  updateUserById: updateUserById,
 };
 
 module.exports = UsersController;

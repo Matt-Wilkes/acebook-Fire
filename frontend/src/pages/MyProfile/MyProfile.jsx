@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActions } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert";
 
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
@@ -13,43 +14,47 @@ import { getUser } from "../../services/users";
 import { updateUser } from "../../services/users";
 
 export const MyProfile = () => {
-  const [mode, setMode] = useState("");
-  const [user, setUser] = useState("");
-  const [formData, setFormData] = useState("");
+  const [mode, setMode] = useState(0);
+  const [user, setUser] = useState({});
+  const [formData, setFormData] = useState({});
+  const [message, setMessage] = useState("");
 
   const token = localStorage.getItem("token");
-
-  if (token !== null) {
-    useEffect(() => {
-      getUser(jwtDecode(token).user_id).then((data) => {
-        setUser(data);
-
-        setFormData({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          city: "",
-          bio: "",
-        });
-
-        setMode(0);
-      });
-    }, []);
-  }
+  useEffect(() => {
+    if (token) {
+      fetchGetUser(token);
+    }
+  }, [token]);
+  const fetchGetUser = async (token) => {
+    const data = await getUser(jwtDecode(token).user_id);
+    setUser(data);
+    setFormData({
+      user_id: jwtDecode(token).user_id,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      city: data.city,
+      bio: data.bio,
+    });
+    setMode(0);
+  };
 
   const handleUpdateFormData = (id, value) => {
     setFormData({ ...formData, [id]: value });
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("onClick");
-    await updateUser(formData);
-    setMode(0);
+    if (formData.firstName.length > 0 && formData.lastName.length > 0) {
+      const data = await updateUser(token, formData);
+      fetchGetUser(token);
+      setMessage(data.message);
+    }
   };
 
-  // console.log(user);
   // console.log(mode);
+  // console.log(user);
   // console.log(formData);
+  // console.log(message);
+
   return (
     <>
       {token === null && <div>You are not logged in. Please login.</div>}
@@ -75,6 +80,11 @@ export const MyProfile = () => {
                 textAlign: "left",
               }}
             >
+              {message && (
+                <Alert data-testid="_message" severity="success">
+                  {message}
+                </Alert>
+              )}
               <Typography gutterBottom variant="h5">
                 {user.firstName} {user.lastName}
               </Typography>
@@ -124,6 +134,11 @@ export const MyProfile = () => {
               id="my-profile-form"
               onSubmit={handleSubmit}
             >
+              {formData.firstName.length === 0 && (
+                <Alert data-testid="_message" severity="error" sx={{ mb: 3 }}>
+                  First Name cannot be empty
+                </Alert>
+              )}
               <TextField
                 label="Edit First Name"
                 fullWidth
@@ -138,6 +153,11 @@ export const MyProfile = () => {
                 }
                 sx={{ mb: 3 }}
               />
+              {formData.lastName.length === 0 && (
+                <Alert data-testid="_message" severity="error" sx={{ mb: 3 }}>
+                  Last Name cannot be empty
+                </Alert>
+              )}
               <TextField
                 label="Edit Last Name"
                 fullWidth
@@ -153,7 +173,7 @@ export const MyProfile = () => {
                 sx={{ mb: 3 }}
               />
               <TextField
-                label={formData.city === "" ? user.city : "Edit City"}
+                label="Edit City"
                 fullWidth
                 size="small"
                 variant="outlined"
@@ -165,7 +185,7 @@ export const MyProfile = () => {
                 sx={{ mb: 3 }}
               />
               <TextField
-                label={formData.bio === "" ? user.bio : "Edit Bio"}
+                label="Edit Bio"
                 fullWidth
                 size="small"
                 multiline
@@ -182,7 +202,10 @@ export const MyProfile = () => {
                 size="small"
                 color="primary"
                 variant="outlined"
-                onClick={() => setMode(0)}
+                onClick={() => {
+                  setMode(0);
+                  setMessage("");
+                }}
               >
                 Cancel
               </Button>
