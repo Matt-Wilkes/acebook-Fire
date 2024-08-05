@@ -1,14 +1,14 @@
 const User = require("../models/user");
 
-const create = (req, res) => {
-  const {firstName,lastName, email, password, confirmPassword} = req.body;
-  // const lastName = req.body.lastName;
-  // const email = req.body.email;
-  // const password = req.body.password;
-  // const confirmPassword = req.body.confirmPassword;
-  console.log(req.body)
+const object = {
 
-  const user = new User({ firstName, lastName, email, password, confirmPassword });
+
+}
+
+const create = (req, res) => {
+  const { firstName, lastName, email, password, confirmPassword, image } = req.body;
+
+  const user = new User({ firstName, lastName, email, password, confirmPassword, image });
   user
     .save()
     .then((user) => {
@@ -21,8 +21,22 @@ const create = (req, res) => {
     });
 };
 
+
+const getAllUsers = async (req, res) => {
+  const users = await User.find();
+  res.status(200).json({ users: users });
+}
+
+const getUser = async (req, res) => {
+  const userId = req.params.userId
+  const user = await User.findById(userId)
+  res.status(200).json({ user })
+}
+
 const UsersController = {
   create: create,
+  getAllUsers: getAllUsers,
+  getUser: getUser,
 };
 
 module.exports = UsersController;

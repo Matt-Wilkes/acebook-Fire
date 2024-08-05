@@ -11,6 +11,10 @@ export const SignupPage = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    // image: ""
+    // Tell coach about having the image as default empty string in the state,
+    // which was in the payload of the request, overriding the other default
+    // value defined in the model and/or controller
   });
 
   const handleUpdateFormData = (id, value) => {
@@ -74,6 +78,14 @@ export const SignupPage = () => {
         type="password"
         value={formData.confirmPassword}
         onChange={(e) => handleUpdateFormData("confirmPassword", e.target.value)}
+      />
+      <label htmlFor="image">Profile Photo (URL)</label>
+      <input
+      placeholder="accepted formats: PNG, JPG, BMP"
+        name="image"
+        type="text"
+        value={formData.image}
+        onChange={(e) => handleUpdateFormData("image", e.target.value)}
       />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>

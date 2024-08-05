@@ -5,6 +5,7 @@ import { getPosts } from "../../services/posts";
 import Post from "../../components/Post/Post";
 // import LogoutButton from "../../components/Navbar/LogoutButton";
 import CreatePost from "../../components/CreatePost/CreatePost";
+import { jwtDecode } from "jwt-decode";
 
 export const FeedPage = () => {
   const [posts, setPosts] = useState([]);
@@ -38,13 +39,16 @@ export const FeedPage = () => {
     return;
   }
 
+
+    const user_id = (jwtDecode(token).user_id)
+
   return (
     <>
       <CreatePost fetchPosts={fetchPosts}/>
       <h2>Posts</h2>
       <div className="feed" role="feed">
         {posts.map((post) => (
-          <Post post={post} key={post._id} />
+          <Post post={post} key={post._id} userId={user_id} />
         ))}
       </div>
     </>

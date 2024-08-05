@@ -35,6 +35,7 @@ export const signup = async (formData) => {
     email: formData.email,
     password: formData.password,
     confirmPassword: formData.confirmPassword,
+    image: formData.image
   };
 
   const requestOptions = {

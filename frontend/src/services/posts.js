@@ -10,7 +10,9 @@ export const getPosts = async (token) => {
   };
 
   const response = await fetch(`${BACKEND_URL}/posts`, requestOptions);
+
   console.log(response.status)
+
   if (response.status !== 200) {
     throw new Error("Unable to fetch posts");
   }
