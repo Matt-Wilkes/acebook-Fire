@@ -28,6 +28,8 @@ describe("/posts", () => {
     const user = new User({
       email: "post-test@test.com",
       password: "12345678",
+      firstName: "test",
+      lastName: "user"
     });
     await user.save();
     await Post.deleteMany({});
