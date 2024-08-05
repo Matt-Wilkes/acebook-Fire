@@ -39,16 +39,13 @@ export const FeedPage = () => {
     return;
   }
 
-
-    const user_id = (jwtDecode(token).user_id)
-
   return (
     <>
       <CreatePost fetchPosts={fetchPosts}/>
       <h2>Posts</h2>
       <div className="feed" role="feed">
         {posts.map((post) => (
-          <Post post={post} key={post._id} userId={user_id} />
+          <Post post={post} key={post._id} />
         ))}
       </div>
     </>
