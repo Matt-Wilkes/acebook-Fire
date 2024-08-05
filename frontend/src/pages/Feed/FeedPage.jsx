@@ -5,7 +5,6 @@ import { getPosts } from "../../services/posts";
 import Post from "../../components/Post/Post";
 // import LogoutButton from "../../components/Navbar/LogoutButton";
 import CreatePost from "../../components/CreatePost/CreatePost";
-import { jwtDecode } from "jwt-decode";
 
 export const FeedPage = () => {
   const [posts, setPosts] = useState([]);
