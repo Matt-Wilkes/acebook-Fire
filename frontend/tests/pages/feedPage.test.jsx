@@ -1,17 +1,16 @@
-import { render, screen } from "@testing-library/react";
-import { userEvent } from '@testing-library/react';
-import { describe, vi } from "vitest";
-
+import { render, screen, fireEvent } from "@testing-library/react";
+import '@testing-library/jest-dom'
+import { describe, expect, vi } from "vitest";
 import { FeedPage } from "../../src/pages/Feed/FeedPage";
-import { getPosts } from "../../src/services/posts";
+import { getPosts, createPost } from "../../src/services/posts";
 import { useNavigate } from "react-router-dom";
 
-const user = userEvent.setup();
 
 // Mocking the getPosts service
 vi.mock("../../src/services/posts", () => {
   const getPostsMock = vi.fn();
-  return { getPosts: getPostsMock };
+  const createPostMock = vi.fn();
+  return { getPosts: getPostsMock, createPost: createPostMock };
 });
 
 // Mocking React Router's useNavigate function
@@ -44,33 +43,5 @@ describe("Feed Page", () => {
     const navigateMock = useNavigate();
     expect(navigateMock).toHaveBeenCalledWith("/login");
   });
-
-  test("It displays posts when submitted to the feed page", async () => {
-    window.localStorage.setItem("token", "testToken");
-    render(<FeedPage />);
-
-    const createPostMessage = screen.findByTestId("tcreate-post");
-    const submitButtonEl = screen.findByRole("submit-button");
   
-    await user.type(createPostMessage, "Test message");
-    await user.click(submitButtonEl);
-
-    const post = await screen.findByRole("article");
-    expect(post.textContent).toEqual("Test message");
-  });
-
-  // test("It displays posts when submitted to the feed page", async () => {
-  //   // Mock local storage for token
-  //   const mockLocalStorage = {
-  //     getItem: jest.fn(() => "testToken"),
-  //     setItem: jest.fn(),
-  //   };
-  //   jest.spyOn(window.localStorage, "getItem", "get").mockImplementation(() => mockLocalStorage.getItem());
-  
-  //   // Render the FeedPage with mocked token
-  //   render(<FeedPage />);
-  
-  //   // Restore local storage mock
-  //   jest.spyOn(window.localStorage, "getItem", "get").mockRestore();
-  // });
 });

@@ -33,9 +33,10 @@ export const CreatePost = (props) => {
     <div className="create-post">
       <h1>Create New Post Here</h1>
       <form onSubmit={handleSubmit}>
-      <label htmlFor="create-post">Create Post</label>
+      <label htmlFor="create-post"></label>
       <input
         id="create-post"
+        placeholder="Create a new post..."
         data-testid="tcreate-post"
         type="text"
         value={post}
