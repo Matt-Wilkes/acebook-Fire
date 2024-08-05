@@ -13,7 +13,7 @@ export const getUsers = async (token) => {
     console.log(response.status)
 
     if (response.status !== 200) {
-        throw new Error("Unable to fetch posts");
+        throw new Error("Unable to fetch users");
     }
 
     const data = await response.json();
