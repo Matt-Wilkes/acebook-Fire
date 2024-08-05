@@ -16,7 +16,8 @@ export const FeedPage = () => {
     if (token) {
       getPosts(token)
         .then((data) => {
-          setPosts(data.posts);
+          const sortedPosts = data.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+          setPosts(sortedPosts);
           localStorage.setItem("token", data.token); //ask about this
         })
         .catch((err) => {
@@ -45,7 +46,7 @@ export const FeedPage = () => {
       <div className="feed" role="feed">
 
         {posts.map((post) => (
-          <Post post={post} key={post._id} />
+          <Post post={post} key={post._id} date={post.date}/>
         ))}
       </div>
     </>
