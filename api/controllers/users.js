@@ -64,9 +64,6 @@ const updateUserById = async (req, res) => {
   if (!req.body.bio) {
     req.body.bio = "No bio added"
   }
-  if (!req.body.image) {
-    req.body.image = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
-  }
 
   await User.findOneAndUpdate(
     { _id: req.body.user_id },

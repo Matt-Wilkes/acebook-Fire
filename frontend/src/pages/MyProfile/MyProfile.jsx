@@ -48,9 +48,23 @@ export const MyProfile = () => {
   const handleUpdateFormData = (id, value) => {
     setFormData({ ...formData, [id]: value });
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (formData.firstName.length > 0 && formData.lastName.length > 0) {
+    if (
+      formData.user_id == user.user_id &&
+      formData.firstName === user.firstName &&
+      formData.lastName === user.lastName &&
+      formData.city === user.city &&
+      formData.bio === user.bio &&
+      (formData.image === user.image || formData.image === "")
+    ) {
+      setMessage("info");
+      setMode(0);
+    } else if (formData.firstName.length > 0 && formData.lastName.length > 0) {
+      if (!formData.image) {
+        formData.image = user.image;
+      }
       const data = await updateUser(token, formData);
       fetchGetUser(token);
       setMessage(data.message);
@@ -102,11 +116,18 @@ export const MyProfile = () => {
                 textAlign: "left",
               }}
             >
-              {message && (
+              {message && message !== "info" && (
                 <Alert data-testid="_message" severity="success">
                   {message}
                 </Alert>
               )}
+
+              {message && message === "info" && (
+                <Alert data-testid="_message" severity="info">
+                  No new details were entered
+                </Alert>
+              )}
+              
               <Typography gutterBottom variant="h5" data-testid="_full-name">
                 {user.firstName} {user.lastName}
               </Typography>
@@ -183,9 +204,9 @@ export const MyProfile = () => {
                 fullWidth
                 size="small"
                 variant="outlined"
-                id="edit-firstName"
+                id="firstName"
                 type="text"
-                name="edit-firstName"
+                name="firstName"
                 value={formData.firstName}
                 onChange={(e) =>
                   handleUpdateFormData("firstName", e.target.value)
@@ -205,7 +226,7 @@ export const MyProfile = () => {
                 fullWidth
                 size="small"
                 variant="outlined"
-                id="edit-lastName"
+                id="lastName"
                 type="text"
                 name="lastName"
                 value={formData.lastName}
@@ -222,7 +243,7 @@ export const MyProfile = () => {
                 fullWidth
                 size="small"
                 variant="outlined"
-                id="edit-city"
+                id="city"
                 type="text"
                 name="city"
                 value={formData.city}
@@ -238,7 +259,7 @@ export const MyProfile = () => {
                 size="small"
                 multiline
                 rows={2}
-                id="edit-bio"
+                id="bio"
                 type="text"
                 name="bio"
                 value={formData.bio}
@@ -254,9 +275,9 @@ export const MyProfile = () => {
                 fullWidth
                 size="small"
                 variant="outlined"
-                id="edit-picture"
+                id="image"
                 type="text"
-                name="picture"
+                name="image"
                 value={formData.image}
                 onChange={(e) => handleUpdateFormData("image", e.target.value)}
               />
