@@ -24,18 +24,20 @@ vi.mock("../../src/services/authentication", () => {
 const completeSignupForm = async () => {
   const user = userEvent.setup();
 
-  const firstNameInputEl = screen.getByLabelText("firstName:");
-  const lastNameInputEl = screen.getByLabelText("lastName:");
-  const emailInputEl = screen.getByLabelText("email:");
-  const passwordInputEl = screen.getByLabelText("password:");
-  const confirmPasswordInputEl = screen.getByLabelText("confirmPassword:");
+  const firstNameInputEl = screen.getByLabelText("First Name:");
+  const lastNameInputEl = screen.getByLabelText("Last Name:");
+  const emailInputEl = screen.getByLabelText("Email:");
+  const passwordInputEl = screen.getByLabelText("Password:");
+  const confirmPasswordInputEl = screen.getByLabelText("Confirm Password:");
+  const imageInputEl = screen.getByLabelText("Profile Photo (URL)")
   const submitButtonEl = screen.getByRole("submit-button");
 
   await user.type(firstNameInputEl, "john");
   await user.type(lastNameInputEl, "smith");
-  await user.type(emailInputEl, "test@email.com");
+  await user.type(emailInputEl, "test@mail.com");
   await user.type(passwordInputEl, "1234");
   await user.type(confirmPasswordInputEl, "1234");
+  await user.type(imageInputEl, "https://www.strasys.uk/wp-content/uploads/2022/02/Depositphotos_484354208_S.jpg");
   await user.click(submitButtonEl);
 };
 
@@ -49,7 +51,14 @@ describe("Signup Page", () => {
 
     await completeSignupForm();
 
-    expect(signup).toHaveBeenCalledWith("john", "smith", "test@email.com", "1234", "1234");
+    expect(signup).toHaveBeenCalledWith({
+      firstName: "john",
+      lastName: "smith",
+      email: "test@mail.com",
+      password: "1234",
+      confirmPassword: "1234",
+      image: "https://www.strasys.uk/wp-content/uploads/2022/02/Depositphotos_484354208_S.jpg"
+    });
   });
 
   test("navigates to /login on successful signup", async () => {

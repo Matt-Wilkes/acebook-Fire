@@ -10,7 +10,6 @@ export const FeedPage = () => {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
-
   const fetchPosts = () => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -25,8 +24,7 @@ export const FeedPage = () => {
           navigate("/login");
         });
     }
-  }
-
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -40,10 +38,9 @@ export const FeedPage = () => {
 
   return (
     <>
-      <CreatePost fetchPosts={fetchPosts}/>
+      <CreatePost fetchPosts={fetchPosts} />
       <h2>Posts</h2>
       <div className="feed" role="feed">
-
         {posts.map((post) => (
           <Post post={post} key={post._id} date={post.date}/>
         ))}
