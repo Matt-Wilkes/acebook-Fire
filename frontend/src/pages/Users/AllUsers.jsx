@@ -23,7 +23,7 @@ const AllUsers = () => {
       getUsers(token)
         .then((data) => {
           setUsersState(data.users);
-          localStorage.setItem("token", data.token);
+          // localStorage.setItem("token", data.token);
         })
         .catch((err) => {
           console.error(err);
@@ -33,8 +33,15 @@ const AllUsers = () => {
   }
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
     fetchUsers();
-  }, []);
+  }, [navigate]);
+
+
 
 
   return (
@@ -48,6 +55,7 @@ const AllUsers = () => {
         <div style={{ margin: "1em",  overflow: 'hidden', display: "inline-block", flexDirection: "row"}}>
 
         <UserCard
+        data-testid="user-card"
         key={id}
         image={image}
         firstName={firstName}
