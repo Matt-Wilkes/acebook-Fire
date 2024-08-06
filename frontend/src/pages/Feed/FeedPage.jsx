@@ -15,7 +15,8 @@ export const FeedPage = () => {
     if (token) {
       getPosts(token)
         .then((data) => {
-          setPosts(data.posts);
+          const sortedPosts = data.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+          setPosts(sortedPosts);
           localStorage.setItem("token", data.token); //ask about this
         })
         .catch((err) => {
@@ -26,14 +27,14 @@ export const FeedPage = () => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
     fetchPosts();
   }, [navigate]);
 
-  const token = localStorage.getItem("token");
-  if (!token) {
-    navigate("/login");
-    return;
-  }
 
   return (
     <>
@@ -41,7 +42,7 @@ export const FeedPage = () => {
       <h2>Posts</h2>
       <div className="feed" role="feed">
         {posts.map((post) => (
-          <Post post={post} key={post._id} />
+          <Post post={post} key={post._id} date={post.date}/>
         ))}
       </div>
     </>

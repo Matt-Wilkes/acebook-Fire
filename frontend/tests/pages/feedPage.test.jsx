@@ -5,7 +5,6 @@ import { FeedPage } from "../../src/pages/Feed/FeedPage";
 import { getPosts, createPost } from "../../src/services/posts";
 import { useNavigate } from "react-router-dom";
 
-
 // Mocking the getPosts service
 vi.mock("../../src/services/posts", () => {
   const getPostsMock = vi.fn();
@@ -43,5 +42,18 @@ describe("Feed Page", () => {
     const navigateMock = useNavigate();
     expect(navigateMock).toHaveBeenCalledWith("/login");
   });
+
+  // test("It displays posts when submitted to the feed page", async () => {
+  //   window.localStorage.setItem("token", "testToken");
+  //   render(<FeedPage />);
+
+  //   const createPostMessage = screen.findByTestId("tcreate-post");
+  //   const submitButtonEl = screen.findByRole("submit-button");
   
+  //   await user.type(createPostMessage, "Test message");
+  //   await user.click(submitButtonEl);
+
+  //   const post = await screen.findByRole("article");
+  //   expect(post.textContent).toEqual("Test message");
+  // });
 });
