@@ -11,18 +11,16 @@ const Post = (props) => {
 
   const handleLike = () => {
     const match = likes.filter((user) => user !== userId);
-      if (likes.length > 0 && match) {
+      if (likes.includes(userId)){
         console.log(match);
         setLikes(likes.filter((user) => user !== userId));
-        // const new_likes = (likes.filter((user) => user !== userId));
         console.log(likes)
-      }else if (likes.length >= 0){
+        console.log("unlikes")
+      }else {
         setLikes([...likes, userId]);
-        console.log(likes);
+        console.log("likes");
       }
     console.log(userId);
-    // setLikes(likes + (isLiked ? -1 : 1));
-    // setIsLiked(!isLiked);
   };
 
   return (
