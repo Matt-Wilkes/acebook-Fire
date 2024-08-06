@@ -73,6 +73,14 @@ const Navbar = () => {
               >
                 Posts
               </Button>
+              <Button
+                component={Link}
+                to="/users"
+                data-testid="_users"
+                color="inherit"
+              >
+                Users
+              </Button>
               <LogoutButton />
             </Box>
           )}

@@ -35,11 +35,11 @@ const getAllUsers = async (req, res) => {
   res.status(200).json({ users: users });
 }
 
-const getUser = async (req, res) => {
-  const userId = req.params.userId
-  const user = await User.findById(userId)
-  res.status(200).json({ user })
-}
+// const getUser = async (req, res) => {
+//   const userId = req.params.userId
+//   const user = await User.findById(userId)
+//   res.status(200).json({ user })
+// }
 
 const findUserById = async (req, res) => {
   // console.log(req.headers.user_id); // <-- this is what comes from frontend (user_id extracted from JWT token)
@@ -84,7 +84,7 @@ const updateUserById = async (req, res) => {
 const UsersController = {
   create: create,
   getAllUsers: getAllUsers,
-  getUser: getUser,
+  // getUser: getUser,
   findUserById: findUserById,
   updateUserById: updateUserById
 
