@@ -38,8 +38,6 @@ export const FeedPage = () => {
   }, [navigate]);
 
 
- 
-
   return (
     <>
       <CreatePost fetchPosts={fetchPosts}/>

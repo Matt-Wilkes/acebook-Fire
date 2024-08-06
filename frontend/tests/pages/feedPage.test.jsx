@@ -50,8 +50,8 @@ describe("Feed Page", () => {
     getPosts.mockResolvedValue({ posts: mockPosts, token: "newToken" });
   
     render(<FeedPage />);
-  
-    const post = (await screen.findAllByRole("article")).children;
+    
+    const post = (await screen.findAllByRole("article"));
     expect(post.textContent).toEqual("Third post");
   })
 
