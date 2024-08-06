@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getPosts } from "../../services/posts";
 import Post from "../../components/Post/Post";
 import CreatePost from "../../components/CreatePost/CreatePost";
-import { jwtDecode } from "jwt-decode";
+
 
 
 export const FeedPage = () => {
@@ -44,7 +44,7 @@ export const FeedPage = () => {
       <h2>Posts</h2>
       <div className="feed" role="feed">
         {posts.map((post) => (
-          <Post post={post} key={post._id} likes={post.likes} token={token} date={post.date}/>
+          <Post post={post} key={post._id} likes={post.likes} date={post.date}/>
         ))}
       </div>
     </>

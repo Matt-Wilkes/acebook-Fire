@@ -4,12 +4,12 @@ import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 const Post = (props) => {
-  const [isLiked, setIsLiked] = useState(false);
+  // const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(props.likes);
 
-  const userId = jwtDecode(props.token).user_id;
-
   const handleLike = () => {
+    const token = localStorage.getItem("token");
+    const userId = jwtDecode(token).user_id;
     const match = likes.filter((user) => user !== userId);
       if (likes.includes(userId)){
         console.log(match);
