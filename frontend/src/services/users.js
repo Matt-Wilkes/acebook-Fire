@@ -10,7 +10,7 @@ export const getUsers = async (token) => {
 
   const response = await fetch(`${BACKEND_URL}/users`, requestOptions);
 
-  console.log(response.status)
+  console.log(response.status);
 
   if (response.status !== 200) {
     throw new Error("Unable to fetch users");
@@ -50,6 +50,7 @@ export const updateUser = async (token, formData) => {
     lastName: title(formData.lastName),
     city: title(formData.city),
     bio: title(formData.bio),
+    image: formData.image,
   };
 
   // console.log(payload);

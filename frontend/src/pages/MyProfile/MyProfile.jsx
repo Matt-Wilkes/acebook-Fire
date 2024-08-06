@@ -6,14 +6,20 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActions } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
 
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+
+import { useContext } from "react";
+import Context from "../../components/Context/Context";
 
 import { getUser } from "../../services/users";
 import { updateUser } from "../../services/users";
 
 export const MyProfile = () => {
+  const { authStatus, setAuthStatus } = useContext(Context);
+
   const [mode, setMode] = useState(0);
   const [user, setUser] = useState({});
   const [formData, setFormData] = useState({});
@@ -34,6 +40,7 @@ export const MyProfile = () => {
       lastName: data.lastName,
       city: data.city,
       bio: data.bio,
+      image: "",
     });
     setMode(0);
   };
@@ -57,9 +64,22 @@ export const MyProfile = () => {
 
   return (
     <>
-      {token === null && <div>You are not logged in. Please login.</div>}
+      {!authStatus && (
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Alert
+            data-testid="_message"
+            severity="warning"
+            sx={{
+              width: "50vw",
+              mt: 2,
+            }}
+          >
+            You are not logged in. Please login.
+          </Alert>
+        </Box>
+      )}
 
-      {token !== null && mode === 0 && (
+      {authStatus && mode === 0 && (
         <>
           <h2>My Profile</h2>
           <Card
@@ -71,10 +91,7 @@ export const MyProfile = () => {
               mb: 3,
             }}
           >
-            <CardMedia
-              component="img"
-              image="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
-            />
+            <CardMedia component="img" image={user.image} />
             <CardContent
               sx={{
                 textAlign: "left",
@@ -113,7 +130,7 @@ export const MyProfile = () => {
         </>
       )}
 
-      {token !== null && mode === 1 && (
+      {authStatus && mode === 1 && (
         <>
           <h2>Edit Profile</h2>
           <Card
@@ -125,10 +142,7 @@ export const MyProfile = () => {
               mb: 3,
             }}
           >
-            <CardMedia
-              component="img"
-              image="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
-            />
+            <CardMedia component="img" image={user.image} />
             <CardContent
               component="form"
               id="my-profile-form"
@@ -195,6 +209,19 @@ export const MyProfile = () => {
                 name="bio"
                 value={formData.bio}
                 onChange={(e) => handleUpdateFormData("bio", e.target.value)}
+                sx={{ mb: 3 }}
+              />
+              <TextField
+                label="Picture URL"
+                InputLabelProps={{ shrink: true }}
+                fullWidth
+                size="small"
+                variant="outlined"
+                id="edit-picture"
+                type="text"
+                name="picture"
+                value={formData.image}
+                onChange={(e) => handleUpdateFormData("image", e.target.value)}
               />
             </CardContent>
             <CardActions>
