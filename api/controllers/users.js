@@ -79,7 +79,7 @@ const updateUserById = async (req, res) => {
     { new: false }
   );
 
-  res.status(200).json({ message: "Profile updated" });
+  res.status(201).json({ message: "Profile updated" });
 
 };
 
