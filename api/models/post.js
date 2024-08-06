@@ -7,7 +7,7 @@ const PostSchema = new mongoose.Schema({
   firstName: { type: String},
   lastName: { type: String },
   userId: { type: String  },
-  Date: { type: Date, default: Date.now },
+  date: { type: Date, default: Date.now },
   likes: {type: Array },
 });
 

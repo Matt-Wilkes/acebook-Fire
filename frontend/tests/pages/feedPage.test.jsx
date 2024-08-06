@@ -1,14 +1,16 @@
-import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
-
+import { render, screen, fireEvent } from "@testing-library/react";
+import '@testing-library/jest-dom'
+import { describe, expect, vi } from "vitest";
 import { FeedPage } from "../../src/pages/Feed/FeedPage";
-import { getPosts } from "../../src/services/posts";
+import { getPosts, createPost } from "../../src/services/posts";
 import { useNavigate } from "react-router-dom";
+
 
 // Mocking the getPosts service
 vi.mock("../../src/services/posts", () => {
   const getPostsMock = vi.fn();
-  return { getPosts: getPostsMock };
+  const createPostMock = vi.fn();
+  return { getPosts: getPostsMock, createPost: createPostMock };
 });
 
 // Mocking React Router's useNavigate function
@@ -41,4 +43,5 @@ describe("Feed Page", () => {
     const navigateMock = useNavigate();
     expect(navigateMock).toHaveBeenCalledWith("/login");
   });
+  
 });
