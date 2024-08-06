@@ -35,11 +35,11 @@ const getAllUsers = async (req, res) => {
   res.status(200).json({ users: users });
 }
 
-const getUser = async (req, res) => {
-  const userId = req.params.userId
-  const user = await User.findById(userId)
-  res.status(200).json({ user })
-}
+// const getUser = async (req, res) => {
+//   const userId = req.params.userId
+//   const user = await User.findById(userId)
+//   res.status(200).json({ user })
+// }
 
 const findUserById = async (req, res) => {
   // console.log(req.headers.user_id); // <-- this is what comes from frontend (user_id extracted from JWT token)
@@ -52,6 +52,7 @@ const findUserById = async (req, res) => {
     email: user["email"],
     city: user["city"],
     bio: user["bio"],
+    image: user["image"],
   });
 };
 
@@ -63,6 +64,9 @@ const updateUserById = async (req, res) => {
   if (!req.body.bio) {
     req.body.bio = "No bio added"
   }
+  if (!req.body.image) {
+    req.body.image = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+  }
 
   await User.findOneAndUpdate(
     { _id: req.body.user_id },
@@ -72,6 +76,7 @@ const updateUserById = async (req, res) => {
         lastName: req.body.lastName,
         city: req.body.city,
         bio: req.body.bio,
+        image: req.body.image,
       },
     },
     { new: false }
@@ -84,7 +89,7 @@ const updateUserById = async (req, res) => {
 const UsersController = {
   create: create,
   getAllUsers: getAllUsers,
-  getUser: getUser,
+  // getUser: getUser,
   findUserById: findUserById,
   updateUserById: updateUserById
 
