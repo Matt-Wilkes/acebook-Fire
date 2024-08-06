@@ -48,6 +48,8 @@ export const CreatePost = (props) => {
       {/* <Link to="/logout">Log Out</Link> */}
     </div>
   );
+
+
 };
 
 export default CreatePost;
