@@ -1,12 +1,12 @@
 const User = require("../models/user");
 
+const object = {
+
+
+}
+
 const create = (req, res) => {
-  const { firstName, lastName, email, password, confirmPassword } = req.body;
-  // const lastName = req.body.lastName;
-  // const email = req.body.email;
-  // const password = req.body.password;
-  // const confirmPassword = req.body.confirmPassword;
-  console.log(req.body);
+  const { firstName, lastName, email, password, confirmPassword, image } = req.body;
 
   const user = new User({
     firstName,
@@ -28,6 +28,18 @@ const create = (req, res) => {
       res.status(400).json({ message: "Something went wrong" });
     });
 };
+
+
+const getAllUsers = async (req, res) => {
+  const users = await User.find();
+  res.status(200).json({ users: users });
+}
+
+const getUser = async (req, res) => {
+  const userId = req.params.userId
+  const user = await User.findById(userId)
+  res.status(200).json({ user })
+}
 
 const findUserById = async (req, res) => {
   // console.log(req.headers.user_id); // <-- this is what comes from frontend (user_id extracted from JWT token)
@@ -71,8 +83,11 @@ const updateUserById = async (req, res) => {
 
 const UsersController = {
   create: create,
+  getAllUsers: getAllUsers,
+  getUser: getUser,
   findUserById: findUserById,
-  updateUserById: updateUserById,
+  updateUserById: updateUserById
+
 };
 
 module.exports = UsersController;

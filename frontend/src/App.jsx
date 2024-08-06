@@ -9,6 +9,7 @@ import { FeedPage } from "./pages/Feed/FeedPage";
 import Navbar from "./components/Navbar/Navbar";
 import Context from "./components/Context/Context";
 import { MyProfile } from "./pages/MyProfile/MyProfile"
+import AllUsers from "./pages/Users/AllUsers";
 
 const NavbarWrapper = () => (
   <>
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/posts",
         element: <FeedPage />,
+      },
+      {
+        path: "/users",
+        element: <AllUsers />,
       },
       {
         path: "/my-profile",
