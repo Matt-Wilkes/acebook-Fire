@@ -6,11 +6,15 @@ import { signup } from "../../services/authentication";
 
 export const SignupPage = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    // firstName: "",
+    // lastName: "",
+    // email: "",
+    // password: "",
+    // confirmPassword: "",
+    // image: ""
+    // Tell coach about having the image as default empty string in the state,
+    // which was in the payload of the request, overriding the other default
+    // value defined in the model and/or controller
   });
 
   const handleUpdateFormData = (id, value) => {
@@ -37,7 +41,8 @@ export const SignupPage = () => {
       <form className="signup-form" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
         <label htmlFor="firstName">First Name:</label>
         <input
-        placeholder="e.g. John"
+          id="firstName"
+          placeholder="e.g. John"
           name="firstName"
           type="text"
           value={formData.firstName}
@@ -45,7 +50,8 @@ export const SignupPage = () => {
         />
         <label htmlFor="lastName">Last Name:</label>
         <input
-        placeholder="e.g. Smith"
+          id="lastName"
+          placeholder="e.g. Smith"
           name="lastName"
           type="text"
           value={formData.lastName}
@@ -53,7 +59,8 @@ export const SignupPage = () => {
         />
         <label htmlFor="email">Email:</label>
         <input
-        placeholder="e.g. john@mail.com"
+          id="email"
+          placeholder="e.g. john@mail.com"
           name="email"
           type="text"
           value={formData.email}
@@ -61,6 +68,7 @@ export const SignupPage = () => {
         />
         <label htmlFor="password">Password:</label>
         <input
+          id="password"
           placeholder="Password"
           name="password"
           type="password"
@@ -69,11 +77,21 @@ export const SignupPage = () => {
         />
       <label htmlFor="confirmPassword">Confirm Password:</label>
       <input
-      placeholder="Confirm Password"
+        id="confirmPassword"
+        placeholder="Confirm Password"
         name="confirmPassword"
         type="password"
         value={formData.confirmPassword}
         onChange={(e) => handleUpdateFormData("confirmPassword", e.target.value)}
+      />
+      <label htmlFor="image">Profile Photo (URL)</label>
+      <input
+        id="image"
+        placeholder="accepted formats: PNG, JPG, BMP"
+        name="image"
+        type="text"
+        value={formData.image}
+        onChange={(e) => handleUpdateFormData("image", e.target.value)}
       />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>

@@ -55,6 +55,9 @@ test("renders Navbar with different links when logged in", () => {
   const posts = within(nav).queryByTestId("_posts");
   expect(posts).toBeInTheDocument();
 
+  const users = within(nav).queryByTestId("_users");
+  expect(users).toBeInTheDocument();
+
   const logout = within(nav).queryByTestId("_logout");
   expect(logout).toBeInTheDocument();
 });
