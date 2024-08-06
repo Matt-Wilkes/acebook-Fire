@@ -29,15 +29,16 @@ export const FeedPage = () => {
 
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
     fetchPosts();
   }, [navigate]);
 
 
-  const token = localStorage.getItem("token");
-  if (!token) {
-    navigate("/login");
-    return;
-  }
+ 
 
   return (
     <>

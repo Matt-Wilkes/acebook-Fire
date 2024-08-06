@@ -6,8 +6,6 @@ import { FeedPage } from "../../src/pages/Feed/FeedPage";
 import { getPosts } from "../../src/services/posts";
 import { useNavigate } from "react-router-dom";
 
-const user = userEvent.setup();
-
 // Mocking the getPosts service
 vi.mock("../../src/services/posts", () => {
   const getPostsMock = vi.fn();
@@ -44,33 +42,17 @@ describe("Feed Page", () => {
     const navigateMock = useNavigate();
     expect(navigateMock).toHaveBeenCalledWith("/login");
   });
-
-  test("It displays posts when submitted to the feed page", async () => {
+  test("It displays posts in descending order (by date)", async () => {
     window.localStorage.setItem("token", "testToken");
+
+    const mockPosts = [{ _id: "12345", message: "First post", date:"2024-08-05T13:06:21.288+00:00" },{ _id: "13456", message: "Second post", date:"2024-08-06T13:06:21.288+00:00" },{ _id: "13456", message: "Third post", date:"2024-08-06T15:06:21.288+00:00" }];
+  
+    getPosts.mockResolvedValue({ posts: mockPosts, token: "newToken" });
+  
     render(<FeedPage />);
-
-    const createPostMessage = screen.findByTestId("tcreate-post");
-    const submitButtonEl = screen.findByRole("submit-button");
   
-    await user.type(createPostMessage, "Test message");
-    await user.click(submitButtonEl);
+    const post = (await screen.findAllByRole("article")).children;
+    expect(post.textContent).toEqual("Third post");
+  })
 
-    const post = await screen.findByRole("article");
-    expect(post.textContent).toEqual("Test message");
-  });
-
-  // test("It displays posts when submitted to the feed page", async () => {
-  //   // Mock local storage for token
-  //   const mockLocalStorage = {
-  //     getItem: jest.fn(() => "testToken"),
-  //     setItem: jest.fn(),
-  //   };
-  //   jest.spyOn(window.localStorage, "getItem", "get").mockImplementation(() => mockLocalStorage.getItem());
-  
-  //   // Render the FeedPage with mocked token
-  //   render(<FeedPage />);
-  
-  //   // Restore local storage mock
-  //   jest.spyOn(window.localStorage, "getItem", "get").mockRestore();
-  // });
 });
