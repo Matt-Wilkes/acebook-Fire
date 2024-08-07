@@ -10,7 +10,7 @@ const LogoutButton = () => {
   const Logout = () => {
     setAuthStatus(false);
     localStorage.removeItem("token");
-    navigate("/", { state: "You were logged out" });
+    navigate("/", { state: "You were logged out." });
   };
 
   return (

@@ -72,8 +72,8 @@ test("clicking Logout button redirects to HomePage with message", async () => {
   expect(logout).toBeInTheDocument();
 
   fireEvent.click(logout);
-  
+
   const message = screen.queryByTestId("_message");
   expect(message).toBeInTheDocument();
-  expect(message).toHaveTextContent("You were logged out");
+  expect(message).toHaveTextContent("You were logged out.");
 });
