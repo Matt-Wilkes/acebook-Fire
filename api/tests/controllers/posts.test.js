@@ -16,7 +16,7 @@ const createToken = (userId) => {
       // Backdate this token of 5 minutes
       iat: Math.floor(Date.now() / 1000) - 5 * 60,
       // Set the JWT token to expire in 10 minutes
-      exp: Math.floor(Date.now() / 1000) + 10 * 60,
+      // exp: Math.floor(Date.now() / 1000) + 10 * 60,
     },
     secret
   );

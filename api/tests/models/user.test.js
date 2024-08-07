@@ -29,7 +29,6 @@ describe("User model", () => {
     expect(user.email).toEqual("someone@example.com");
   });
 
-
   it("has a password", () => {
     const user = new User({
       email: "someone@example.com",
@@ -42,7 +41,7 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
-      confirmPassword: "confirmation"
+      confirmPassword: "confirmation",
     });
     expect(user.confirmPassword).toEqual("confirmation");
   });
@@ -60,7 +59,7 @@ describe("User model", () => {
       lastName: "smith",
       email: "someone@example.com",
       password: "password",
-      confirmPassword: "confirmation"
+      confirmPassword: "confirmation",
     });
 
     await user.save();
@@ -71,5 +70,26 @@ describe("User model", () => {
     expect(users[0].email).toEqual("someone@example.com");
     expect(users[0].password).toEqual("password");
     expect(users[0].confirmPassword).toEqual("confirmation");
+  });
+
+  ////////////
+
+  it("can have city, bio, default image", async () => {
+    const mockUser = new User({
+      firstName: "Potato",
+      lastName: "Tomato",
+      email: "clarkson@farm.com",
+      password: "12345",
+      confirmPassword: "12345",
+      city: "London",
+      bio: "Eat, sleep, work, repeat",
+    });
+
+    await mockUser.save();
+
+    const users = await User.find();
+    expect(users[0].image).toEqual("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541");
+    expect(users[0].city).toEqual("London")
+    expect(users[0].bio).toEqual("Eat, sleep, work, repeat")
   });
 });
