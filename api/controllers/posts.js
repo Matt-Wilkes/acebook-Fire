@@ -15,9 +15,27 @@ const createPost = async (req, res) => {
   res.status(201).json({ message: "Post created", token: newToken });
 };
 
+const updatePost = async (req, res) => {
+  console.log(`1${req.body.id}`)
+  console.log(req.body.likes)
+    //const post = await Post.findById(req.params.id);
+  await Post.findOneAndUpdate(
+    //console.log(`2${req.body.id}`),
+    { _id: req.body.id },
+    { 
+      $set: {
+        likes: req.body.likes,
+      },
+    },
+    { new: false });
+  res.status(200).json({ message: "Likes updated" });
+
+}
+
 const PostsController = {
   getAllPosts: getAllPosts,
   createPost: createPost,
+  updatePost: updatePost,
 };
 
 module.exports = PostsController;
