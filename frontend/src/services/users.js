@@ -31,7 +31,7 @@ export const getUser = async (user_id) => {
   const response = await fetch(`${BACKEND_URL}/users/get-user`, requestOptions);
   // console.log("getUser response status: " + response.status);
   if (response.status !== 200) {
-    throw new Error("No such user received from API");
+    throw new Error("No user found in backend");
   }
 
   const data = await response.json();
@@ -64,6 +64,9 @@ export const updateUser = async (token, formData) => {
   };
 
   const response = await fetch(`${BACKEND_URL}/users/update-user`, requestOptions);
+  if (response.status !== 201) {
+    throw new Error("No user updated in backend");
+  }
 
   const data = await response.json();
   return data;

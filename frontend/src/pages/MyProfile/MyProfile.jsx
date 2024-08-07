@@ -31,6 +31,7 @@ export const MyProfile = () => {
       fetchGetUser(token);
     }
   }, [token]);
+
   const fetchGetUser = async (token) => {
     const data = await getUser(jwtDecode(token).user_id);
     setUser(data);
@@ -42,18 +43,32 @@ export const MyProfile = () => {
       bio: data.bio,
       image: "",
     });
-    setMode(0);
   };
 
   const handleUpdateFormData = (id, value) => {
     setFormData({ ...formData, [id]: value });
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (formData.firstName.length > 0 && formData.lastName.length > 0) {
+    if (
+      formData.user_id == user.user_id &&
+      formData.firstName === user.firstName &&
+      formData.lastName === user.lastName &&
+      formData.city === user.city &&
+      formData.bio === user.bio &&
+      (formData.image === user.image || formData.image === "")
+    ) {
+      setMessage("info");
+      setMode(0);
+    } else if (formData.firstName.length > 0 && formData.lastName.length > 0) {
+      if (!formData.image) {
+        formData.image = user.image;
+      }
       const data = await updateUser(token, formData);
       fetchGetUser(token);
       setMessage(data.message);
+      setMode(0);
     }
   };
 
@@ -81,7 +96,7 @@ export const MyProfile = () => {
 
       {authStatus && mode === 0 && (
         <>
-          <h2>My Profile</h2>
+          <h2 data-testid="_my-profile">My Profile</h2>
           <Card
             raised
             sx={{
@@ -91,27 +106,50 @@ export const MyProfile = () => {
               mb: 3,
             }}
           >
-            <CardMedia component="img" image={user.image} />
+            <CardMedia
+              component="img"
+              image={user.image}
+              data-testid="_image"
+            />
             <CardContent
               sx={{
                 textAlign: "left",
               }}
             >
-              {message && (
+              {message && message !== "info" && (
                 <Alert data-testid="_message" severity="success">
                   {message}
                 </Alert>
               )}
-              <Typography gutterBottom variant="h5">
+
+              {message && message === "info" && (
+                <Alert data-testid="_message" severity="info">
+                  No new details were entered
+                </Alert>
+              )}
+              
+              <Typography gutterBottom variant="h5" data-testid="_full-name">
                 {user.firstName} {user.lastName}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                data-testid="_email"
+              >
                 <strong>Email:</strong> {user.email}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                data-testid="_city"
+              >
                 <strong>City:</strong> {user.city}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                data-testid="_bio"
+              >
                 <strong>Bio:</strong> {user.bio}
               </Typography>
             </CardContent>
@@ -122,6 +160,7 @@ export const MyProfile = () => {
                 color="primary"
                 variant="outlined"
                 onClick={() => setMode(1)}
+                data-testid="_edit-button"
               >
                 Edit
               </Button>
@@ -132,7 +171,7 @@ export const MyProfile = () => {
 
       {authStatus && mode === 1 && (
         <>
-          <h2>Edit Profile</h2>
+          <h2 data-testid="_edit-profile">Edit Profile</h2>
           <Card
             raised
             sx={{
@@ -142,7 +181,11 @@ export const MyProfile = () => {
               mb: 3,
             }}
           >
-            <CardMedia component="img" image={user.image} />
+            <CardMedia
+              component="img"
+              image={user.image}
+              data-testid="_image-edit"
+            />
             <CardContent
               component="form"
               id="my-profile-form"
@@ -154,13 +197,16 @@ export const MyProfile = () => {
                 </Alert>
               )}
               <TextField
+                inputProps={{
+                  "data-testid": "_first-name-field",
+                }}
                 label="Edit First Name"
                 fullWidth
                 size="small"
                 variant="outlined"
-                id="edit-firstName"
+                id="firstName"
                 type="text"
-                name="edit-firstName"
+                name="firstName"
                 value={formData.firstName}
                 onChange={(e) =>
                   handleUpdateFormData("firstName", e.target.value)
@@ -173,11 +219,14 @@ export const MyProfile = () => {
                 </Alert>
               )}
               <TextField
+                inputProps={{
+                  "data-testid": "_last-name-field",
+                }}
                 label="Edit Last Name"
                 fullWidth
                 size="small"
                 variant="outlined"
-                id="edit-lastName"
+                id="lastName"
                 type="text"
                 name="lastName"
                 value={formData.lastName}
@@ -187,11 +236,14 @@ export const MyProfile = () => {
                 sx={{ mb: 3 }}
               />
               <TextField
+                inputProps={{
+                  "data-testid": "_city-field",
+                }}
                 label="Edit City"
                 fullWidth
                 size="small"
                 variant="outlined"
-                id="edit-city"
+                id="city"
                 type="text"
                 name="city"
                 value={formData.city}
@@ -199,12 +251,15 @@ export const MyProfile = () => {
                 sx={{ mb: 3 }}
               />
               <TextField
+                inputProps={{
+                  "data-testid": "_bio-field",
+                }}
                 label="Edit Bio"
                 fullWidth
                 size="small"
                 multiline
                 rows={2}
-                id="edit-bio"
+                id="bio"
                 type="text"
                 name="bio"
                 value={formData.bio}
@@ -212,20 +267,24 @@ export const MyProfile = () => {
                 sx={{ mb: 3 }}
               />
               <TextField
+                inputProps={{
+                  "data-testid": "_picture-url-field",
+                }}
                 label="Picture URL"
                 InputLabelProps={{ shrink: true }}
                 fullWidth
                 size="small"
                 variant="outlined"
-                id="edit-picture"
+                id="image"
                 type="text"
-                name="picture"
+                name="image"
                 value={formData.image}
                 onChange={(e) => handleUpdateFormData("image", e.target.value)}
               />
             </CardContent>
             <CardActions>
               <Button
+                data-testid="_cancel-button"
                 size="small"
                 color="primary"
                 variant="outlined"
@@ -236,7 +295,12 @@ export const MyProfile = () => {
               >
                 Cancel
               </Button>
-              <Button type="submit" form="my-profile-form" variant="contained">
+              <Button
+                data-testid="_submit-button"
+                type="submit"
+                form="my-profile-form"
+                variant="contained"
+              >
                 Submit
               </Button>
             </CardActions>
