@@ -22,10 +22,12 @@ export const getPosts = async (token) => {
 };
 
 
-export const createPost = async (token, message) => {
+export const createPost = async (token, postData) => {
 
   const payload = {
-    message: message
+    message: postData.message,
+    userId: postData.userId,
+    likes: postData.likes
   };
 
   const requestOptions = {

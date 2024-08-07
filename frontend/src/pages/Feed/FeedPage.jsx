@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getPosts } from "../../services/posts";
+import { getUser } from "../../services/users";
 import Post from "../../components/Post/Post";
 import CreatePost from "../../components/CreatePost/CreatePost";
 
 
-
 export const FeedPage = () => {
+  // const [user, setUser] = useState({})
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
-  // const userId = jwtDecode(token).user_id;
 
   const fetchPosts = () => {
     const token = localStorage.getItem("token");
@@ -19,7 +19,7 @@ export const FeedPage = () => {
         .then((data) => {
           const sortedPosts = data.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
           setPosts(sortedPosts);
-          localStorage.setItem("token", data.token); //ask about this
+          localStorage.setItem("token", data.token); 
         })
         .catch((err) => {
           console.error(err);
@@ -35,7 +35,18 @@ export const FeedPage = () => {
       return;
     }
     fetchPosts();
-  }, [navigate]);
+  },[]); 
+
+  // 
+  // const fetchGetUser = async (token) => {
+  //   const data = await getUser(jwtDecode(token).user_id);
+  //   console.log(data)
+  //   setUser({
+  //     user_id: jwtDecode(token).user_id,
+  //     firstName: data.firstName,
+  //     lastName: data.lastName,
+  //   });
+  // };
 
 
   return (
