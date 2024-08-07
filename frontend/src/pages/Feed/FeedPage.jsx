@@ -37,7 +37,7 @@ export const FeedPage = () => {
     fetchPosts();
   },[]); 
 
-  // 
+  
   // const fetchGetUser = async (token) => {
   //   const data = await getUser(jwtDecode(token).user_id);
   //   console.log(data)
@@ -55,7 +55,7 @@ export const FeedPage = () => {
       <h2>Posts</h2>
       <div className="feed" role="feed">
         {posts.map((post) => (
-          <Post post={post} key={post._id} likes={post.likes} date={post.date}/>
+          <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId}/>
         ))}
       </div>
     </>

@@ -25,7 +25,9 @@ const Post = (props) => {
 
   return (
     <article key={props.post._id}>
-      {props.post.message}
+      message: {props.post.message} 
+      user: {props.userId}
+      likes: {likes}
       <Button onClick={handleLike}>
         <ThumbUpIcon />
         {likes !== 0 && <div>{likes.length}</div>}
