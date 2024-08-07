@@ -28,7 +28,7 @@ const updatePost = async (req, res) => {
       },
     },
     { new: false });
-  res.status(200).json({ message: "Likes updated" });
+  res.status(201).json({ message: "Likes updated" });
 
 }
 
