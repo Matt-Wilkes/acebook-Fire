@@ -1,12 +1,8 @@
 const User = require("../models/user");
 
-const object = {
-
-
-}
-
 const create = (req, res) => {
-  const { firstName, lastName, email, password, confirmPassword, image } = req.body;
+  const { firstName, lastName, email, password, confirmPassword, image } =
+    req.body;
 
   const user = new User({
     firstName,
@@ -29,11 +25,10 @@ const create = (req, res) => {
     });
 };
 
-
 const getAllUsers = async (req, res) => {
   const users = await User.find();
   res.status(200).json({ users: users });
-}
+};
 
 // const getUser = async (req, res) => {
 //   const userId = req.params.userId
@@ -45,27 +40,32 @@ const findUserById = async (req, res) => {
   // console.log(req.headers.user_id); // <-- this is what comes from frontend (user_id extracted from JWT token)
   const user = await User.findOne({ _id: req.headers.user_id });
   // console.log(user);
-  res.status(200).json({
-    user_id: user["_id"].toString(),
-    firstName: user["firstName"],
-    lastName: user["lastName"],
-    email: user["email"],
-    city: user["city"],
-    bio: user["bio"],
-    image: user["image"],
-  });
+
+  if (!user) {
+    res.status(400).json({ message: "User not found by id" });
+  } else if (user) {
+    res.status(200).json({
+      user_id: user["_id"].toString(),
+      firstName: user["firstName"],
+      lastName: user["lastName"],
+      email: user["email"],
+      city: user["city"],
+      bio: user["bio"],
+      image: user["image"],
+    });
+  }
 };
 
 const updateUserById = async (req, res) => {
   // console.log(req.body);
   if (!req.body.city) {
-    req.body.city = "No city added"
+    req.body.city = "No city added";
   }
   if (!req.body.bio) {
-    req.body.bio = "No bio added"
+    req.body.bio = "No bio added";
   }
 
-  await User.findOneAndUpdate(
+  const updatedUser = await User.findOneAndUpdate(
     { _id: req.body.user_id },
     {
       $set: {
@@ -76,11 +76,14 @@ const updateUserById = async (req, res) => {
         image: req.body.image,
       },
     },
-    { new: false }
+    { new: true }
   );
 
-  res.status(201).json({ message: "Profile updated" });
-
+  if (!updatedUser) {
+    res.status(400).json({ message: "User not found by id, and not updated" });
+  } else if (updatedUser) {
+    res.status(201).json({ message: "Profile updated" });
+  }
 };
 
 const UsersController = {
@@ -88,8 +91,7 @@ const UsersController = {
   getAllUsers: getAllUsers,
   // getUser: getUser,
   findUserById: findUserById,
-  updateUserById: updateUserById
-
+  updateUserById: updateUserById,
 };
 
 module.exports = UsersController;
