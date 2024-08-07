@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getPosts } from "../../services/posts";
-import { getUser } from "../../services/users";
+//import { getUser } from "../../services/users";
 import Post from "../../components/Post/Post";
 import CreatePost from "../../components/CreatePost/CreatePost";
 
