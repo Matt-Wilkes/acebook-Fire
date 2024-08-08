@@ -16,7 +16,6 @@ export const CreatePost = (props) => {
     likes: [],
   });
 
- 
   const handlePostChange = (event) => {
   const token = localStorage.getItem("token");
     setPost({
@@ -37,6 +36,7 @@ export const CreatePost = (props) => {
         await createPost(token, post);
         navigate("/posts");
         props.fetchPosts();
+        setPost({ message: "", userId: "", likes: []});
       } catch (err) {
         console.error(err);
         navigate("/posts");
