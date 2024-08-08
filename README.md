@@ -129,3 +129,4 @@ they should then show up in the browser if you refresh the page.
 npm install --save-dev @testing-library/jest-dom
 npm install jwt-decode
 npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
