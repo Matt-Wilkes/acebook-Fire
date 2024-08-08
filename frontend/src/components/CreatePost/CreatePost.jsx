@@ -48,29 +48,6 @@ export const CreatePost = (props) => {
     }
   };
   return (
-    //   <><Box
-    //   className="create-post"
-    //   onSubmit={handleSubmit}
-    //   component="form"
-    //   sx={{
-    //     width: "100vh",
-    //     height: "600vh",
-    //     maxWidth: "100%",
-    //   }}
-    // >
-    //   <TextField
-    //     fullWidth
-    //     id="create-post"
-    //     placeholder="Create a new post..."
-    //     data-testid="tcreate-post"
-    //     type="text"
-    //     value={post.message}
-    //     onChange={handlePostChange}
-    //     // label="fullWidth"
-    //     multiline
-    //     rows={4} />
-    //   <Input type="submit" variant="outlined" value="Post" />
-    // </Box><label htmlFor="create-post"></label></>
     <Card 
       sx={{
         width: "90vh",

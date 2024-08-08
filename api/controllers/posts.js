@@ -39,10 +39,11 @@ const updatePost = async (req, res) => {
     { 
       $set: {
         likes: req.body.likes,
+        comments: req.body.comments
       },
     },
     { new: false });
-  res.status(201).json({ message: "Likes updated" });
+  res.status(201).json({ message: "Post updated" });
 
 }
 

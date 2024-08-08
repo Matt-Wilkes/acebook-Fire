@@ -63,8 +63,7 @@ const Post = (props) => {
       </CardContent>
       <CardActions disableSpacing >
         <Button onClick={handleLike}>
-        <ThumbUpIcon />
-        {likes !== 0 && likes.length}
+        <ThumbUpIcon /> {likes !== 0 && likes.length}
         </Button>
       </CardActions>
       {/* <Collapse in={expanded} timeout="auto" unmountOnExit>

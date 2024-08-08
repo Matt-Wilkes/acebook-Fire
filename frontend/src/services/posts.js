@@ -26,7 +26,7 @@ export const createPost = async (token, postData) => {
     message: postData.message,
     userId: postData.userId,
     likes: postData.likes,
-    firstName: postData.firstName,
+    comments: postData.comments,
   };
 
   const requestOptions = {
@@ -48,6 +48,7 @@ export const updatePost = async (token, postData) => {
   const payload = {
     likes: postData.likes,
     id: postData.id,
+    comments: postData.comments
   };
 
   const requestOptions = {
