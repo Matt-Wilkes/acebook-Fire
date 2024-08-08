@@ -28,15 +28,15 @@ export const SignupPage = () => {
     lastName: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    image: ""
   });
-  const [passwordsMatch, setPasswordsMatch] = useState(false)
+  // const [passwordsMatch, setPasswordsMatch] = useState(false)
 
   const handleUpdateFormData = (id, value) => {
 
     setFormData({ ...formData, [id]: value });
-    setPasswordsMatch(formData.password !== formData.confirmPassword)
-    console.log(formData.password)
+    // console.log(formData.password)
   };
   const navigate = useNavigate();
 
@@ -86,7 +86,6 @@ export const SignupPage = () => {
 
       {!authStatus && (
         <>
-          {/* <div style={{ display: 'grid', placeItems: 'center' }}> */}
 
 
           <Card sx={{
@@ -288,87 +287,7 @@ export const SignupPage = () => {
                 Submit
               </Button>
             </CardActions>
-
           </Card >
-
-          {/* </div> */}
-
-
-
-
-
-
-          {/* <h2>Signup</h2>
-          <form
-            className="signup-form"
-            onSubmit={handleSubmit}
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            <label htmlFor="firstName">First Name:</label>
-            <input
-              id="firstName"
-              placeholder="e.g. John"
-              name="firstName"
-              type="text"
-              value={formData.firstName}
-              onChange={(e) =>
-                handleUpdateFormData("firstName", e.target.value)
-              }
-            />
-            <label htmlFor="lastName">Last Name:</label>
-            <input
-              id="lastName"
-              placeholder="e.g. Smith"
-              name="lastName"
-              type="text"
-              value={formData.lastName}
-              onChange={(e) => handleUpdateFormData("lastName", e.target.value)}
-            />
-            <label htmlFor="email">Email:</label>
-            <input
-              id="email"
-              placeholder="e.g. john@mail.com"
-              name="email"
-              type="text"
-              value={formData.email}
-              onChange={(e) => handleUpdateFormData("email", e.target.value)}
-            />
-            <label htmlFor="password">Password:</label>
-            <input
-              id="password"
-              placeholder="Password"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={(e) => handleUpdateFormData("password", e.target.value)}
-            />
-              <label htmlFor="confirmPassword">Confirm Password:</label>
-              <input
-                id="confirmPassword"
-                placeholder="Confirm Password"
-                name="confirmPassword"
-                type="password"
-                value={formData.confirmPassword}
-                onChange={(e) =>
-                handleUpdateFormData("confirmPassword", e.target.value)
-              }
-              />
-              <label htmlFor="image">Profile Photo (URL)</label>
-              <input
-                id="image"
-                placeholder="accepted formats: PNG, JPG, BMP"
-                name="image"
-                type="text"
-                value={formData.image}
-                onChange={(e) => handleUpdateFormData("image", e.target.value)}
-              />
-            <input
-              role="submit-button"
-              id="submit"
-              type="submit"
-              value="Submit"
-            />
-          </form> */}
         </>
       )}
     </>
