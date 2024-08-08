@@ -20,41 +20,39 @@ import { IconButton, InputAdornment } from "@mui/material";
 
 export const SignupPage = () => {
   const [formData, setFormData] = useState({
-    // firstName: "",
-    // lastName: "",
-    // email: "",
-    // password: "",
-    // confirmPassword: "",
-    // image: ""
-    // Tell coach about having the image as default empty string in the state,
-    // which was in the payload of the request, overriding the other default
-    // value defined in the model and/or controller
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
   });
-
-  const [photoUrlPlaceholder, setPhotoUrlPlaceholder] = useState("accepted formats: PNG, JPG, BMP")
+  const [passwordsMatch, setPasswordsMatch] = useState(false)
 
   const handleUpdateFormData = (id, value) => {
 
-    if (formData.password !== formData.confirmPassword) {
-      <Alert data-testid="_message" severity="error" sx={{ mb: 3 }}>
-        Last Name cannot be empty
-      </Alert>
-    }
     setFormData({ ...formData, [id]: value });
+    setPasswordsMatch(formData.password !== formData.confirmPassword)
+    console.log(formData.password)
   };
   const navigate = useNavigate();
 
+  // if (formData.password !== formData.confirmPassword) {
+  //   setPasswordsMatch(false)
+  // }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      await signup(formData);
-      console.log("redirecting...:");
-      navigate("/login");
-    } catch (err) {
-      console.error(err);
-      navigate("/signup");
+    if (formData.password === formData.confirmPassword) {
+      try {
+        await signup(formData);
+        console.log("redirecting...:");
+        navigate("/login");
+      } catch (err) {
+        console.error(err);
+        navigate("/signup");
+      }
     }
-  };
+  }
 
   const handlePaste = async (target) => {
     console.log(target)
@@ -84,9 +82,18 @@ export const SignupPage = () => {
           subheader="Please enter your details"
           style={{ textAlign: "left" }}
         />
+
+
+
         <CardContent data-testid="user-card" component="form"
           id="signup-form"
           onSubmit={handleSubmit}>
+          {formData.password !== formData.confirmPassword &&
+            < Alert severity="error" sx={{ mb: 3 }}>
+              Passwords don't match
+            </Alert>}
+
+
           <Typography gutterBottom variant="p" component="div">
             {/* <label htmlFor="firstName">First Name</label> */}
           </Typography>
@@ -215,6 +222,7 @@ export const SignupPage = () => {
                 <InputAdornment position="end">
                   {/* <IconButton edge="end" color="primary"> */}
                   <ContentPasteIcon onClick={(e) => handlePaste(e)} />
+                  {/* <button onClick={(e) => handlePaste(e)}>Paste</button> */}
                   {/* </IconButton> */}
                 </InputAdornment>
               ),
@@ -261,7 +269,7 @@ export const SignupPage = () => {
           </Button>
         </CardActions>
 
-      </Card>
+      </Card >
 
       {/* </div> */}
 
