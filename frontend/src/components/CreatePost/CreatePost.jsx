@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "../../services/posts";
 import { jwtDecode } from "jwt-decode";
-import Box from "@mui/material/Box";
-import { Button, Input } from "@mui/material";
+import { Input } from "@mui/material";
 
 import "./CreatePost.css";
 

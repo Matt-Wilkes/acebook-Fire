@@ -5,7 +5,8 @@ import Post from "../../components/Post/Post";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import { useContext } from "react";
 import Context from "../../components/Context/Context";
-import { Box } from "@mui/material";
+import Container from '@mui/material/Container';
+import Box from "@mui/material/Box";
 
 
 export const FeedPage = () => {
@@ -44,11 +45,14 @@ export const FeedPage = () => {
     <>
       <CreatePost fetchPosts={fetchPosts} />
       <h2>Posts</h2>
-      <div className="feed" role="feed">
-        {posts.map((post) => (
+      <Container justifyContent="center" className="feed" role="feed" sx={{ bgcolor: '#cfe8fc', width: '100vh' }}>
+      <Box justifyContent="center" className="feed" role="feed" >
+      {posts.map((post) => (
           <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId}/>
         ))}
-      </div>
+      </Box>
+      </Container>
+      
     </>
   );
 }
