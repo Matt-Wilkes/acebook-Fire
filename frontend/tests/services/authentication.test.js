@@ -37,12 +37,13 @@ describe("authentication service", () => {
       const testEmail = "test@testEmail.com";
       const testPassword = "12345678";
 
-      fetch.mockResponseOnce(JSON.stringify({ token: "testToken" }), {
+      fetch.mockResponseOnce(JSON.stringify({ token: "testToken", message: "OK" }), {
         status: 201,
       });
 
-      const token = await login(testEmail, testPassword);
-      expect(token).toEqual("testToken");
+      const data = await login(testEmail, testPassword);
+      expect(data.token).toEqual("testToken");
+      expect(data.message).toEqual("OK");
     });
 
     test("throws an error if the request failed", async () => {
@@ -64,7 +65,7 @@ describe("authentication service", () => {
   });
 
   describe("signup", () => {
-    test("calls the backend url for a token", async () => {
+    test("calls the backend url for a token, returns message if user created", async () => {
       const testFormData = {
         firstName: "john",
         lastName: "smith",
@@ -73,11 +74,11 @@ describe("authentication service", () => {
         confirmPassword: "12345678",
       }
 
-      fetch.mockResponseOnce("", {
+      fetch.mockResponseOnce(JSON.stringify({ message: "User created. Please login." }), {
         status: 201,
       });
 
-      await signup(testFormData);
+      const data = await signup(testFormData);
 
       // This is an array of the arguments that were last passed to fetch
       const fetchArguments = fetch.mock.lastCall;
@@ -86,25 +87,27 @@ describe("authentication service", () => {
 
       expect(url).toEqual(`${BACKEND_URL}/users`);
       expect(options.method).toEqual("POST");
-      console.log(options)
+      // console.log(options)
       expect(options.body).toEqual(
         JSON.stringify(testFormData)
         // JSON.stringify({ firstName: testFirstName, lastName: testLastName, email: testEmail, password: testPassword, confirmPassword: testConfirmPassword })
       );
       expect(options.headers["Content-Type"]).toEqual("application/json");
+      expect(data.message).toEqual("User created. Please login.");
     });
 
-    test("returns nothing if the signup request was a success", async () => {
-      const testEmail = "test@testEmail.com";
-      const testPassword = "12345678";
+    // THIS IS REDUNDANT:
+    // test("returns nothing if the signup request was a success", async () => {
+    //   const testEmail = "test@testEmail.com";
+    //   const testPassword = "12345678";
 
-      fetch.mockResponseOnce(JSON.stringify(""), {
-        status: 201,
-      });
+    //   fetch.mockResponseOnce(JSON.stringify(""), {
+    //     status: 201,
+    //   });
 
-      const token = await signup(testEmail, testPassword);
-      expect(token).toEqual(undefined);
-    });
+    //   const token = await signup(testEmail, testPassword);
+    //   expect(token).toEqual(undefined);
+    // });
 
     test("throws an error if the request failed", async () => {
       const testEmail = "test@testEmail.com";

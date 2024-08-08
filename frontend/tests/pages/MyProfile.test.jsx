@@ -54,7 +54,6 @@ describe("MyProfile.jsx", () => {
       "token",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjZhZThmNmFjYzNiNzc1NDJlYTc0ZDIxIiwiaWF0IjoxNzIyODk1OTcwfQ.QOeRf8AgdnpPEiD_51hF73W9WW2c87Z5v_ZVTo6riP8"
     );
-    // console.log(localStorage.getItem("token"));
 
     setAuthStatus(true);
 
@@ -96,7 +95,6 @@ describe("MyProfile.jsx", () => {
       "token",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjZhZThmNmFjYzNiNzc1NDJlYTc0ZDIxIiwiaWF0IjoxNzIyODk1OTcwfQ.QOeRf8AgdnpPEiD_51hF73W9WW2c87Z5v_ZVTo6riP8"
     );
-    // console.log(localStorage.getItem("token"));
 
     setAuthStatus(true);
 
@@ -112,7 +110,6 @@ describe("MyProfile.jsx", () => {
 
     const editButton = screen.queryByTestId("_edit-button");
     expect(editButton).toBeInTheDocument();
-    console.log(editButton);
 
     await user.click(editButton);
 
@@ -152,7 +149,6 @@ describe("MyProfile.jsx", () => {
       "token",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjZhZThmNmFjYzNiNzc1NDJlYTc0ZDIxIiwiaWF0IjoxNzIyODk1OTcwfQ.QOeRf8AgdnpPEiD_51hF73W9WW2c87Z5v_ZVTo6riP8"
     );
-    // console.log(localStorage.getItem("token"));
 
     setAuthStatus(true);
 
@@ -193,7 +189,6 @@ describe("MyProfile.jsx", () => {
       "token",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjZhZThmNmFjYzNiNzc1NDJlYTc0ZDIxIiwiaWF0IjoxNzIyODk1OTcwfQ.QOeRf8AgdnpPEiD_51hF73W9WW2c87Z5v_ZVTo6riP8"
     );
-    // console.log(localStorage.getItem("token"));
 
     setAuthStatus(true);
 

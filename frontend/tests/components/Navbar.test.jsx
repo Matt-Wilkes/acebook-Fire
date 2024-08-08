@@ -10,7 +10,7 @@ afterEach(() => {
   cleanup();
 });
 
-// Variable and function to pass data to Context.Provider to mock behaviour of useState in App.jsx
+// Mock authentication
 let authStatus = false;
 const setAuthStatus = (newValue) => {
   authStatus = newValue;

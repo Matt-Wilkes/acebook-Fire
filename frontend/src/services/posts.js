@@ -11,7 +11,7 @@ export const getPosts = async (token) => {
 
   const response = await fetch(`${BACKEND_URL}/posts`, requestOptions);
 
-  console.log(response.status)
+  console.log(response.status);
 
   if (response.status !== 200) {
     throw new Error("Unable to fetch posts");
@@ -21,11 +21,11 @@ export const getPosts = async (token) => {
   return data;
 };
 
-
-export const createPost = async (token, message) => {
-
+export const createPost = async (token, postData) => {
   const payload = {
-    message: message
+    message: postData.message,
+    userId: postData.userId,
+    likes: postData.likes,
   };
 
   const requestOptions = {
@@ -41,6 +41,25 @@ export const createPost = async (token, message) => {
   if (response.status !== 201) {
     throw new Error("Unable to create post");
   }
+};
 
+export const updatePost = async (token, postData) => {
+  const payload = {
+    likes: postData.likes,
+    id: postData.id,
+  };
 
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(payload),
+  };
+  console.log(JSON.stringify(payload));
+  const response = await fetch(`${BACKEND_URL}/posts/add-like`, requestOptions);
+  if (response.status !== 201) {
+    throw new Error("Unable to update post");
+  }
 };
