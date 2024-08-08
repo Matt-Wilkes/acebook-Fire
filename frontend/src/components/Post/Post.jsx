@@ -35,14 +35,6 @@ const Post = (props) => {
   
 
   return (
-    // <article key={props.post._id}>
-    //   {props.post.message}
-    //   <Button onClick={handleLike}>
-    //     <ThumbUpIcon />
-    //     {likes !== 0 && <div>{likes.length}</div>}
-    //   </Button>
-    // </article>
-    // sx={{ maxWidth: 500 }}
     
     <Card key={props.post._id} sx={{ mt: 1, mb: 1}} raised>
 

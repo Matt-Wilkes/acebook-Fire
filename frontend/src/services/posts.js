@@ -25,8 +25,6 @@ export const createPost = async (token, postData) => {
   const payload = {
     message: postData.message,
     userId: postData.userId,
-    // firstName: postData.firstName,
-    // lastname: postData.lastName,
     likes: postData.likes,
   };
 
