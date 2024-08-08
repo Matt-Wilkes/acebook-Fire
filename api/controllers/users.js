@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Post = require("../models/post");
 
 const create = (req, res) => {
   const { firstName, lastName, email, password, confirmPassword, image } =
@@ -71,6 +72,8 @@ const updateUserById = async (req, res) => {
   if (!req.body.bio) {
     req.body.bio = "No bio added";
   }
+
+  await Post.updateMany({userId: req.body.user_id }, {$set:{firstName: req.body.firstName}, lastName: req.body.lastName})
 
   const updatedUser = await User.findOneAndUpdate(
     { _id: req.body.user_id },
