@@ -45,7 +45,7 @@ export const FeedPage = () => {
     <>
       <CreatePost fetchPosts={fetchPosts} />
       <h2>Posts</h2>
-      <Container justifyContent="center" className="feed" role="feed" sx={{ bgcolor: '#cfe8fc', width: '100vh' }}>
+      <Container justifyContent="center" className="feed" role="feed" sx={{width: '100vh' }}>
       <Box justifyContent="center" className="feed" role="feed" >
       {posts.map((post) => (
           <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId}/>
