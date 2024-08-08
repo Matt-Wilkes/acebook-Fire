@@ -13,6 +13,7 @@ import Alert from "@mui/material/Alert";
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import Icon from '@mui/material/Icon';
 import Box from "@mui/material/Box";
+import CardHeader from "@mui/material/CardHeader";
 
 import { signup } from "../../services/authentication";
 import { IconButton, InputAdornment } from "@mui/material";
@@ -59,7 +60,7 @@ export const SignupPage = () => {
     console.log(target)
     const text = await navigator.clipboard.readText()
     if (text) {
-      setPhotoUrlPlaceholder("")
+      // setPhotoUrlPlaceholder("")
     }
     setFormData({ ...formData, "image": text })
   }
@@ -67,18 +68,36 @@ export const SignupPage = () => {
 
   return (
     <>
-      <Card sx={{ maxWidth: 380 }} style={{ margin: "2em", overflow: 'hidden' }}>
+      {/* <div style={{ display: 'grid', placeItems: 'center' }}> */}
 
 
-        <CardContent data-testid="user-card">
+      <Card sx={{
+        width: "50vh",
+        margin: "0 auto",
+        padding: "0.1em",
+        mb: 3,
+        mt: 10,
+      }}>
+
+        <CardHeader
+          title="Sign Up"
+          subheader="Please enter your details"
+          style={{ textAlign: "left" }}
+        />
+        <CardContent data-testid="user-card" component="form"
+          id="signup-form"
+          onSubmit={handleSubmit}>
           <Typography gutterBottom variant="p" component="div">
-            <label htmlFor="firstName">First Name</label>
+            {/* <label htmlFor="firstName">First Name</label> */}
           </Typography>
           <TextField
             inputProps={{
               "data-testid": "none",
+
             }}
-            label="e.g. John"
+            InputLabelProps={{ shrink: true }}
+            label="First Name"
+            placeholder="e.g. John"
             fullWidth
             size="small"
             variant="outlined"
@@ -92,13 +111,15 @@ export const SignupPage = () => {
             sx={{ mb: 3 }}
           />
           <Typography gutterBottom variant="p" component="div">
-            <label htmlFor="lastName">Last Name</label>
+            {/* <label htmlFor="lastName">Last Name</label> */}
           </Typography>
           <TextField
             inputProps={{
               "data-testid": "none",
             }}
-            label="e.g. Smith"
+            InputLabelProps={{ shrink: true }}
+            label="Last Name"
+            placeholder="e.g. Smith"
             fullWidth
             size="small"
             variant="outlined"
@@ -114,13 +135,15 @@ export const SignupPage = () => {
 
 
           <Typography gutterBottom variant="p" component="div">
-            <label htmlFor="email">Email</label>
+            {/* <label htmlFor="email">Email</label> */}
           </Typography>
           <TextField
             inputProps={{
               "data-testid": "none",
             }}
-            label="john@example.com"
+            InputLabelProps={{ shrink: true }}
+            label="Email"
+            placeholder="john@example.com"
             fullWidth
             size="small"
             variant="outlined"
@@ -136,13 +159,15 @@ export const SignupPage = () => {
 
 
           <Typography gutterBottom variant="p" component="div">
-            <label htmlFor="password">Password</label>
+            {/* <label htmlFor="password">Password</label> */}
           </Typography>
           <TextField
             inputProps={{
               "data-testid": "none",
             }}
-            label="Choose a strong one"
+            InputLabelProps={{ shrink: true }}
+            label="Password"
+            placeholder="Choose a strong one"
             fullWidth
             size="small"
             variant="outlined"
@@ -157,13 +182,15 @@ export const SignupPage = () => {
           />
 
           <Typography gutterBottom variant="p" component="div">
-            <label htmlFor="confirmPassword">Confirm Password</label>
+            {/* <label htmlFor="confirmPassword">Confirm Password</label> */}
           </Typography>
           <TextField
             inputProps={{
               "data-testid": "none",
             }}
-            label="Confirm it"
+            InputLabelProps={{ shrink: true }}
+            label="Confirm Password"
+            placeholder="Confirm it"
             fullWidth
             size="small"
             variant="outlined"
@@ -179,7 +206,7 @@ export const SignupPage = () => {
 
 
           <Typography gutterBottom variant="p" component="div">
-            <label htmlFor="image">Profile Photo URL</label>
+            {/* <label htmlFor="image">Profile Photo URL</label> */}
           </Typography>
           <TextField
             InputProps={{
@@ -192,7 +219,9 @@ export const SignupPage = () => {
                 </InputAdornment>
               ),
             }}
-            label={photoUrlPlaceholder}
+            InputLabelProps={{ shrink: true }}
+            label="Profile Photo URL"
+            placeholder="accepted formats: PNG, JPG, BMP"
             fullWidth
             size="small"
             variant="outlined"
@@ -222,26 +251,26 @@ export const SignupPage = () => {
         </CardContent>
 
         <CardActions>
-          {/* <button style={{ color: "blue" }} size="small">{button1Text}</button> */}
-          <Button variant="outlined">
-            {/* {button1Text} */}
+          <Button
+            data-testid="_submit-button"
+            type="submit"
+            form="signup-form"
+            variant="contained"
+          >
             Submit
           </Button>
-          {/* <Button>
-          {button2Text}
-        </Button> */}
         </CardActions>
 
       </Card>
 
+      {/* </div> */}
 
 
 
 
 
 
-
-      <h2>Signup</h2>
+      {/* <h2>Signup</h2>
       <form className="signup-form" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
         <label htmlFor="firstName">First Name:</label>
         <input
@@ -298,7 +327,7 @@ export const SignupPage = () => {
           onChange={(e) => handleUpdateFormData("image", e.target.value)}
         />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
-      </form>
+      </form> */}
     </>
   );
 };
