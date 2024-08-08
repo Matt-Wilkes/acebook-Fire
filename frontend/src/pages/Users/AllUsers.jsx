@@ -46,28 +46,27 @@ const AllUsers = () => {
 
   return (
     <>
-      <h1>All Users</h1>
-    {usersState.map((user)=>{
+      <h2>All Users</h2>
+      {usersState.map((user) => {
 
-      const {id, image, firstName, lastName, email} = user
-      return(
-        <>
-        <div style={{ margin: "1em",  overflow: 'hidden', display: "inline-block", flexDirection: "row"}}>
+        const { id, image, firstName, lastName, email } = user
+        return (
+          <>
+            <div style={{ margin: "1em", overflow: 'hidden', display: "inline-block", flexDirection: "row" }}>
 
-        <UserCard
-        data-testid="user-card"
-        key={id}
-        image={image}
-        firstName={firstName}
-        lastName={lastName}
-        email={email}
-        button1Text={"Add Friend"}
-        // button2Text={"❤️"}
-        />
-        </div>
-        </>
-      )
-    })}
+              <UserCard
+                key={id}
+                image={image}
+                firstName={firstName}
+                lastName={lastName}
+                email={email}
+                button1Text={"Add Friend"}
+              // button2Text={"❤️"}
+              />
+            </div>
+          </>
+        )
+      })}
     </>
   )
 }
