@@ -36,7 +36,13 @@ const Post = (props) => {
 
   return (
     
-    <Card key={props.post._id} sx={{ mt: 1, mb: 1}} raised>
+    <Card key={props.post._id}       
+    sx={{
+      width: "90vh",
+      margin: "0 auto",
+      padding: "0.1em",
+      mt: 3,
+    }} raised>
 
       <CardHeader
         avatar={
