@@ -26,7 +26,7 @@ describe('CreatePost Component', () => {
     const validToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTY3ODkwLCJpYXQiOjE1MTYyMzkwMjJ9.sflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
     window.localStorage.setItem("token", validToken);
 
-    createPost.mockResolvedValue();
+    createPost.mockResolvedValue({ message: "Post created", token: "newToken" });
 
     const fetchPostsMock = vi.fn();
     render(
