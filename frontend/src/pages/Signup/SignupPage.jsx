@@ -36,7 +36,7 @@ export const SignupPage = () => {
     try {
       const data = await signup(formData);
       // console.log("redirecting...:");
-      navigate("/login", {state: data.message});
+      navigate("/", {state: [0, data.message]});
     } catch (err) {
       console.error(err);
       navigate("/signup");

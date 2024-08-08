@@ -1,5 +1,5 @@
-import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
 
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -13,19 +13,20 @@ export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { state } = useLocation();
   const { authStatus, setAuthStatus } = useContext(Context);
+  const { state } = useLocation();
+  const message = state || "";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const token = await login(email, password);
+    const data = await login(email, password);
+    // console.log(data)
+    if (data.message === "OK") {
       setAuthStatus(true);
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", data.token);
       navigate("/posts");
-    } catch (err) {
-      console.error(err);
-      navigate("/login");
+    } else {
+      navigate("/login", { state: [2, data] });
     }
   };
 
@@ -56,21 +57,20 @@ export const LoginPage = () => {
 
       {!authStatus && (
         <>
-          {state && (
+          {message && message[0] === 2 && (
             <Box display="flex" justifyContent="center" alignItems="center">
               <Alert
                 data-testid="_message"
-                severity="success"
+                severity="error"
                 sx={{
                   width: "50vw",
                   mt: 2,
                 }}
               >
-                {state}
+                {message[1]}
               </Alert>
             </Box>
           )}
-
           <h2>Login</h2>
           <form onSubmit={handleSubmit}>
             <label htmlFor="email">Email:</label>
