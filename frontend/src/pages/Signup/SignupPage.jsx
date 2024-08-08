@@ -6,14 +6,14 @@ import Context from "../../components/Context/Context";
 
 import "./signUpPage.css";
 
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
-import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import Box from "@mui/material/Box";
 import CardHeader from "@mui/material/CardHeader";
 
@@ -22,6 +22,7 @@ import { InputAdornment } from "@mui/material";
 
 export const SignupPage = () => {
   const { authStatus, setAuthStatus } = useContext(Context);
+  const [message, setMessage] = useState("");
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -29,12 +30,11 @@ export const SignupPage = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    image: ""
+    image: "",
   });
   // const [passwordsMatch, setPasswordsMatch] = useState(false)
 
   const handleUpdateFormData = (id, value) => {
-
     setFormData({ ...formData, [id]: value });
     // console.log(formData.password)
   };
@@ -49,23 +49,26 @@ export const SignupPage = () => {
     if (formData.password === formData.confirmPassword) {
       try {
         const data = await signup(formData);
-        // console.log("redirecting...:");
-        navigate("/", { state: [0, data.message] });
+        if (data === "User with email provided already exists") {
+          setMessage(data);
+        } else {
+          navigate("/", { state: [0, data.message] });
+        }
       } catch (err) {
         console.error(err);
         navigate("/signup");
       }
     }
-  }
+  };
 
   const handlePaste = async (target) => {
-    console.log(target)
-    const text = await navigator.clipboard.readText()
+    console.log(target);
+    const text = await navigator.clipboard.readText();
     if (text) {
       // setPhotoUrlPlaceholder("")
     }
-    setFormData({ ...formData, "image": text })
-  }
+    setFormData({ ...formData, image: text });
+  };
 
   return (
     <>
@@ -86,32 +89,47 @@ export const SignupPage = () => {
 
       {!authStatus && (
         <>
+          {message && (
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <Alert
+                data-testid="_message"
+                severity="error"
+                sx={{
+                  width: "50vw",
+                  mt: 2,
+                }}
+              >
+                {message}
+              </Alert>
+            </Box>
+          )}
 
-
-          <Card sx={{
-            width: "50vh",
-            margin: "0 auto",
-            padding: "0.1em",
-            mb: 3,
-            mt: 10,
-          }}>
-
+          <Card
+            sx={{
+              width: "50vh",
+              margin: "0 auto",
+              padding: "0.1em",
+              mb: 3,
+              mt: 10,
+            }}
+          >
             <CardHeader
               title="Sign Up"
               subheader="Please enter your details"
               style={{ textAlign: "left" }}
             />
 
-
-
-            <CardContent data-testid="user-card" component="form"
+            <CardContent
+              data-testid="user-card"
+              component="form"
               id="signup-form"
-              onSubmit={handleSubmit}>
-              {formData.password !== formData.confirmPassword &&
-                < Alert severity="error" sx={{ mb: 3 }}>
+              onSubmit={handleSubmit}
+            >
+              {formData.password !== formData.confirmPassword && (
+                <Alert severity="error" sx={{ mb: 3 }}>
                   Passwords don't match
-                </Alert>}
-
+                </Alert>
+              )}
 
               <Typography gutterBottom variant="p" component="div">
                 {/* <label htmlFor="firstName">First Name</label> */}
@@ -119,7 +137,6 @@ export const SignupPage = () => {
               <TextField
                 inputProps={{
                   "data-testid": "none",
-
                 }}
                 InputLabelProps={{ shrink: true }}
                 label="First Name"
@@ -159,7 +176,6 @@ export const SignupPage = () => {
                 sx={{ mb: 3 }}
               />
 
-
               <Typography gutterBottom variant="p" component="div">
                 {/* <label htmlFor="email">Email</label> */}
               </Typography>
@@ -177,12 +193,9 @@ export const SignupPage = () => {
                 type="email"
                 name="email"
                 value={formData.email}
-                onChange={(e) =>
-                  handleUpdateFormData("email", e.target.value)
-                }
+                onChange={(e) => handleUpdateFormData("email", e.target.value)}
                 sx={{ mb: 3 }}
               />
-
 
               <Typography gutterBottom variant="p" component="div">
                 {/* <label htmlFor="password">Password</label> */}
@@ -230,7 +243,6 @@ export const SignupPage = () => {
                 sx={{ mb: 3 }}
               />
 
-
               <Typography gutterBottom variant="p" component="div">
                 {/* <label htmlFor="image">Profile Photo URL</label> */}
               </Typography>
@@ -256,12 +268,9 @@ export const SignupPage = () => {
                 type="text"
                 name="image"
                 value={formData.image}
-                onChange={(e) =>
-                  handleUpdateFormData("image", e.target.value)
-                }
+                onChange={(e) => handleUpdateFormData("image", e.target.value)}
                 sx={{ mb: 3 }}
               />
-
 
               {/* <Typography variant="body1" color="text.secondary">
           {firstName}
@@ -274,7 +283,6 @@ export const SignupPage = () => {
               <Typography variant="body1" color="text.secondary">
                 {/* {email} */}
               </Typography>
-
             </CardContent>
 
             <CardActions>
@@ -287,7 +295,7 @@ export const SignupPage = () => {
                 Submit
               </Button>
             </CardActions>
-          </Card >
+          </Card>
         </>
       )}
     </>

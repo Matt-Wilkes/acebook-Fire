@@ -50,6 +50,9 @@ export const signup = async (formData) => {
   if (response.status === 201) {
     const data = await response.json();
     return data;
+  } else if (response.status === 409) {
+    const data = await response.json();
+    return data.message;
   } else {
     throw new Error(
       `Received status ${response.status} when signing up. Expected 201`

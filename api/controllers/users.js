@@ -4,26 +4,32 @@ const create = (req, res) => {
   const { firstName, lastName, email, password, confirmPassword, image } =
     req.body;
 
-  const user = new User({
-    firstName,
-    lastName,
-    email,
-    password,
-    confirmPassword,
-    image,
-    city: "No city added",
-    bio: "No bio added",
-  });
-  user
-    .save()
-    .then((user) => {
-      console.log("User created, id:", user._id.toString());
-      res.status(201).json({ message: "User created. Please login." });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(400).json({ message: "Something went wrong" });
+  const duplicateEmail = User.findOne({ email: req.headers.email });
+  if (duplicateEmail) {
+    res.status(409).json({ message: "User with email provided already exists" });
+  }
+  if (!duplicateEmail) {
+    const user = new User({
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+      image,
+      city: "No city added",
+      bio: "No bio added",
     });
+    user
+      .save()
+      .then((user) => {
+        console.log("User created, id:", user._id.toString());
+        res.status(201).json({ message: "User created. Please login." });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(400).json({ message: "Something went wrong" });
+      });
+  }
 };
 
 const getAllUsers = async (req, res) => {
