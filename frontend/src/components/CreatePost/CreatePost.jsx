@@ -101,17 +101,17 @@ export const CreatePost = (props) => {
           onChange={handlePostChange}
           multiline
           rows={4}
-          sx={{ mb: 3 }}
+          // sx={{ mb: 3 }}
         />
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ display:"flex" , justifyContent:"right", mr: 1.3}}>
         <Button
           data-testid="_submit-button"
           type="submit"
           form="post-form"
           variant="contained"
         >
-          Submit
+          Post
         </Button>
       </CardActions>
     </Card>

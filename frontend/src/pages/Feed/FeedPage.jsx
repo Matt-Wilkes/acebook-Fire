@@ -38,7 +38,7 @@ export const FeedPage = () => {
       return;
     }
     fetchPosts();
-  },[navigate]); 
+  },[]); 
 
 
   return (
