@@ -1,6 +1,3 @@
-import Alert from "@mui/material/Alert";
-import Box from "@mui/material/Box";
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,18 +9,16 @@ import "./signUpPage.css";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
-import Icon from '@mui/material/Icon';
 import Box from "@mui/material/Box";
 import CardHeader from "@mui/material/CardHeader";
 
 import { signup } from "../../services/authentication";
-import { IconButton, InputAdornment } from "@mui/material";
+import { InputAdornment } from "@mui/material";
 
 export const SignupPage = () => {
   const { authStatus, setAuthStatus } = useContext(Context);
