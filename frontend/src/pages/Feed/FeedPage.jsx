@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getPosts } from "../../services/posts";
-//import { getUser } from "../../services/users";
 import Post from "../../components/Post/Post";
 import CreatePost from "../../components/CreatePost/CreatePost";
+import { useContext } from "react";
+import Context from "../../components/Context/Context";
+import Container from '@mui/material/Container';
+import Box from "@mui/material/Box";
 
 
 export const FeedPage = () => {
-  // const [user, setUser] = useState({})
+  // const { authStatus, setAuthStatus } = useContext(Context);
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
@@ -37,27 +40,19 @@ export const FeedPage = () => {
     fetchPosts();
   },[]); 
 
-  
-  // const fetchGetUser = async (token) => {
-  //   const data = await getUser(jwtDecode(token).user_id);
-  //   console.log(data)
-  //   setUser({
-  //     user_id: jwtDecode(token).user_id,
-  //     firstName: data.firstName,
-  //     lastName: data.lastName,
-  //   });
-  // };
-
 
   return (
     <>
       <CreatePost fetchPosts={fetchPosts} />
       <h2>Posts</h2>
-      <div className="feed" role="feed">
-        {posts.map((post) => (
-          <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId}/>
+      <Container justifyContent="center" className="feed" role="feed" sx={{width: '100vh' }}>
+      <Box justifyContent="center" className="feed" role="feed" >
+      {posts.map((post) => (
+          <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId} firstName={post.firstName} lastName={post.lastName}/>
         ))}
-      </div>
+      </Box>
+      </Container>
+      
     </>
   );
 }
