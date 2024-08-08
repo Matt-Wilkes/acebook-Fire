@@ -10,6 +10,7 @@ const create = (req, res) => {
     email,
     password,
     confirmPassword,
+    image,
     city: "No city added",
     bio: "No bio added",
   });
