@@ -53,7 +53,7 @@ const Post = (props) => {
           </Avatar>
     
         }
-        title="Login"
+        title={`${props.firstName} ${props.lastName}`}
         style={{ textAlign: "left" }}
       
       />

@@ -48,7 +48,7 @@ export const FeedPage = () => {
       <Container justifyContent="center" className="feed" role="feed" sx={{width: '100vh' }}>
       <Box justifyContent="center" className="feed" role="feed" >
       {posts.map((post) => (
-          <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId}/>
+          <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId} firstName={post.firstName} lastName={post.lastName}/>
         ))}
       </Box>
       </Container>
