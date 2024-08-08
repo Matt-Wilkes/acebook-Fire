@@ -26,6 +26,7 @@ export const createPost = async (token, postData) => {
     message: postData.message,
     userId: postData.userId,
     likes: postData.likes,
+    firstName: postData.firstName,
   };
 
   const requestOptions = {
