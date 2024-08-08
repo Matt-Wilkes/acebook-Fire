@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getPosts } from "../../services/posts";
-//import { getUser } from "../../services/users";
 import Post from "../../components/Post/Post";
 import CreatePost from "../../components/CreatePost/CreatePost";
+import { useContext } from "react";
+import Context from "../../components/Context/Context";
+import { Box } from "@mui/material";
 
 
 export const FeedPage = () => {
-  // const [user, setUser] = useState({})
+  // const { authStatus, setAuthStatus } = useContext(Context);
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
@@ -36,17 +38,6 @@ export const FeedPage = () => {
     }
     fetchPosts();
   },[]); 
-
-  
-  // const fetchGetUser = async (token) => {
-  //   const data = await getUser(jwtDecode(token).user_id);
-  //   console.log(data)
-  //   setUser({
-  //     user_id: jwtDecode(token).user_id,
-  //     firstName: data.firstName,
-  //     lastName: data.lastName,
-  //   });
-  // };
 
 
   return (

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "../../services/posts";
 import { jwtDecode } from "jwt-decode";
+import Box from "@mui/material/Box";
+import { Button, Input } from "@mui/material";
 
 import "./CreatePost.css";
-
-
 
 export const CreatePost = (props) => {
 
@@ -56,7 +56,7 @@ export const CreatePost = (props) => {
           value={post.message}
           onChange={handlePostChange}
         />
-        <input type="submit" />
+        <Input type="submit" variant="outlined" value="Post"/>
       </form>
     </div>
   );
