@@ -7,6 +7,7 @@ import { useContext } from "react";
 import Context from "../../components/Context/Context";
 import Container from '@mui/material/Container';
 import Box from "@mui/material/Box";
+import UserCard from "../../components/UserCard/UserCard";
 
 
 export const FeedPage = () => {
@@ -48,7 +49,7 @@ export const FeedPage = () => {
       <Container justifyContent="center" className="feed" role="feed" sx={{width: '100vh' }}>
       <Box justifyContent="center" className="feed" role="feed" >
       {posts.map((post) => (
-          <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId} firstName={post.firstName} lastName={post.lastName}/>
+          <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId} firstName={post.firstName} lastName={post.lastName} fetchPosts={fetchPosts}/>
         ))}
       </Box>
       </Container>

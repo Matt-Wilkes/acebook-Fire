@@ -6,6 +6,7 @@ export const getPosts = async (token) => {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
+      userId: "66aa5832288a1b5a01d2c5e4"
     },
   };
 
@@ -37,7 +38,6 @@ export const createPost = async (token, postData) => {
     },
     body: JSON.stringify(payload),
   };
-  console.log(JSON.stringify(payload));
   const response = await fetch(`${BACKEND_URL}/posts`, requestOptions);
   if (response.status !== 201) {
     throw new Error("Unable to create post");
@@ -61,6 +61,29 @@ export const updatePost = async (token, postData) => {
   };
   console.log(JSON.stringify(payload));
   const response = await fetch(`${BACKEND_URL}/posts/add-like`, requestOptions);
+  if (response.status !== 201) {
+    throw new Error("Unable to update post");
+  }
+};
+
+export const updatePostComments = async (token, postData) => {
+  const payload = {
+    id: postData.id,
+    comments: [postData.comment]
+  };
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(payload),
+  };
+  console.log(JSON.stringify(postData));
+  console.log(JSON.stringify(payload));
+  console.log(JSON.stringify(payload));
+  const response = await fetch(`${BACKEND_URL}/posts/add-comment`, requestOptions);
   if (response.status !== 201) {
     throw new Error("Unable to update post");
   }

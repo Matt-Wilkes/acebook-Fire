@@ -13,6 +13,10 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import Collapse from "@mui/material/Collapse";
+import { styled } from "@mui/material/styles";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CreateComment from "../CreateComment/CreateComment";
+
 
 const Post = (props) => {
   const [likes, setLikes] = useState(props.likes);
@@ -21,6 +25,17 @@ const Post = (props) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const ExpandMore = styled((props) => {
+    const { expand, ...other } = props;
+    return <IconButton {...other} />;
+  })(({ theme, expand }) => ({
+    transform: !expand ? "rotate(0deg)" : "rotateY(180deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest
+    })
+  }));
 
   const handleLike = async () => {
     const token = localStorage.getItem("token");
@@ -58,7 +73,7 @@ const Post = (props) => {
         padding: "0.1em",
         mt: 3,
       }}
-      raised
+      elevation={2}
     >
       <CardHeader
         avatar={
@@ -77,19 +92,24 @@ const Post = (props) => {
           {props.post.message}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions sx={{ display: "flex", justifyContent: "right", mr: 1.3 }}>
         <Button onClick={handleLike}>
           <ThumbUpIcon /> {likes !== 0 && likes.length}
-          <AddCommentIcon />
         </Button>
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <Button>
+          <AddCommentIcon/>
+        </Button>
+        </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
-          </Typography>
+          <CreateComment post_id={props.post._id}/>
         </CardContent>
       </Collapse>
     </Card>

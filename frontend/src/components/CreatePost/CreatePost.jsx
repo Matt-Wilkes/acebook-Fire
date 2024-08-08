@@ -12,8 +12,6 @@ import { Button, CardActions } from "@mui/material";
 import "./CreatePost.css";
 
 export const CreatePost = (props) => {
-
-
   const [post, setPost] = useState({
     message: "",
     userId: "",
@@ -25,7 +23,7 @@ export const CreatePost = (props) => {
     setPost({
       ...post,
       message: event.target.value,
-      userId: jwtDecode(token).user_id
+      userId: jwtDecode(token).user_id,
     });
   };
 
@@ -47,8 +45,9 @@ export const CreatePost = (props) => {
       }
     }
   };
+  
   return (
-    <Card 
+    <Card
       sx={{
         width: "90vh",
         margin: "0 auto",
@@ -56,13 +55,7 @@ export const CreatePost = (props) => {
         mt: 3,
       }}
     >
-
-      <CardContent
-        component="form"
-        id="post-form"
-        onSubmit={handleSubmit}
-      >
-
+      <CardContent component="form" id="post-form" onSubmit={handleSubmit}>
         <TextField
           inputProps={{
             "data-testid": "tcreate-post",
@@ -81,7 +74,7 @@ export const CreatePost = (props) => {
           // sx={{ mb: 3 }}
         />
       </CardContent>
-      <CardActions sx={{ display:"flex" , justifyContent:"right", mr: 1.3}}>
+      <CardActions sx={{ display: "flex", justifyContent: "right", mr: 1.3 }}>
         <Button
           data-testid="_submit-button"
           type="submit"
