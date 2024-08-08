@@ -7,7 +7,9 @@ const create = (req, res) => {
 
   const duplicateEmail = User.findOne({ email: req.headers.email });
   if (duplicateEmail) {
-    res.status(409).json({ message: "User with email provided already exists" });
+    res
+      .status(409)
+      .json({ message: "User with email provided already exists" });
   }
   if (!duplicateEmail) {
     const user = new User({
@@ -73,7 +75,16 @@ const updateUserById = async (req, res) => {
     req.body.bio = "No bio added";
   }
 
-  await Post.updateMany({userId: req.body.user_id }, {$set:{firstName: req.body.firstName}, lastName: req.body.lastName})
+  await Post.updateMany(
+    { userId: req.body.user_id },
+    {
+      $set: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        image: req.body.image,
+      },
+    }
+  );
 
   const updatedUser = await User.findOneAndUpdate(
     { _id: req.body.user_id },
