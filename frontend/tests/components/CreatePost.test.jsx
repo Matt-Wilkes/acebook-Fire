@@ -12,7 +12,7 @@ vi.mock("../../src/services/posts", () => {
   return { createPost: createPostMock };
 });
 
-// Mock jwt-decode 
+// Mock jwt-decode
 vi.mock('jwt-decode', async () => {
   const actual = await vi.importActual('jwt-decode');
   return {
@@ -34,7 +34,7 @@ describe('CreatePost Component', () => {
         <CreatePost fetchPosts={fetchPostsMock} />
       </BrowserRouter>
     );
-   
+
     const input = screen.getByPlaceholderText('Create a new post...');
     fireEvent.change(input, { target: { value: 'This is a test post' } });
 
@@ -45,7 +45,7 @@ describe('CreatePost Component', () => {
       expect(createPost).toHaveBeenCalledWith(validToken, 'This is a test post');
     });
 
-    console.log(createPost.mockResolvedValue)
+    // console.log(createPost.mockResolvedValue)
 
     // Wait for fetchPosts to be called
     await waitFor(() => {

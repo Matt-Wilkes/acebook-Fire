@@ -17,7 +17,7 @@ const create = (req, res) => {
     .save()
     .then((user) => {
       console.log("User created, id:", user._id.toString());
-      res.status(201).json({ message: "OK" });
+      res.status(201).json({ message: "User created. Please login." });
     })
     .catch((err) => {
       console.error(err);
