@@ -19,7 +19,10 @@ const createPost = async (req, res) => {
     userId: req.body.userId,
     firstName: user.firstName,
     lastName: user.lastName,
-    likes:  req.body.likes,});
+    likes:  req.body.likes,
+    comments: req.body.comments
+  });
+    
 
   post.save();
 

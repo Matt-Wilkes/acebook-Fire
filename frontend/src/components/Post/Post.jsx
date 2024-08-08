@@ -11,70 +11,87 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
+import AddCommentIcon from "@mui/icons-material/AddComment";
+import Collapse from "@mui/material/Collapse";
 
 const Post = (props) => {
-  // const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(props.likes);
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   const handleLike = async () => {
     const token = localStorage.getItem("token");
     const userId = jwtDecode(token).user_id;
     if (likes.includes(userId)) {
       setLikes(likes.filter((user) => user !== userId));
-      console.log(`'unlike'${likes}`);
     } else {
       setLikes([...likes, userId]);
-      console.log(`'like'${likes}`);
     }
   };
   useEffect(() => {
     const token = localStorage.getItem("token");
     updatePost(token, { id: props.post._id, likes: likes });
-    }, [likes]);
-  
+  }, [likes]);
+
+  const formatDate = (date) => {
+    const options = {
+      year: "2-digit",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    };
+
+    return new Date(date).toLocaleString("en-GB", options).replace(",", "");
+  };
 
   return (
-    
-    <Card key={props.post._id}       
-    sx={{
-      width: "90vh",
-      margin: "0 auto",
-      padding: "0.1em",
-      mt: 3,
-    }} raised>
-
+    <Card
+      key={props.post._id}
+      sx={{
+        width: "90vh",
+        margin: "0 auto",
+        padding: "0.1em",
+        mt: 3,
+      }}
+      raised
+    >
       <CardHeader
         avatar={
-          <Avatar 
-          sx={{ bgcolor: "#fbac3f", display: "flex"}} alt="Matt" src="/broken-image.jpg" >
-          </Avatar>
-    
+          <Avatar
+            sx={{ bgcolor: "#fbac3f", display: "flex" }}
+            alt="Matt"
+            src="/broken-image.jpg"
+          ></Avatar>
         }
         title={`${props.firstName} ${props.lastName}`}
         style={{ textAlign: "left" }}
-      
+        subheader={`${formatDate(props.date)}`}
       />
-      <CardContent sx={{display: "flex"}}>
-
+      <CardContent sx={{ display: "flex" }}>
         <Typography variant="body2" color="text.secondary">
-        {props.post.message}
+          {props.post.message}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing >
+      <CardActions disableSpacing>
         <Button onClick={handleLike}>
-        <ThumbUpIcon /> {likes !== 0 && likes.length}
+          <ThumbUpIcon /> {likes !== 0 && likes.length}
+          <AddCommentIcon />
         </Button>
       </CardActions>
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          {/* <Typography paragraph>Method:</Typography>
+          <Typography paragraph>Method:</Typography>
           <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography> */}
-        {/* </CardContent> */}
-      {/* </Collapse> */} 
+            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
+            set aside for 10 minutes.
+          </Typography>
+        </CardContent>
+      </Collapse>
     </Card>
   );
 };
