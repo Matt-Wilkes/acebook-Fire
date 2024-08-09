@@ -1,29 +1,41 @@
 const User = require("../models/user");
+const Post = require("../models/post");
 
 const create = (req, res) => {
   const { firstName, lastName, email, password, confirmPassword, image } =
     req.body;
 
-  const user = new User({
-    firstName,
-    lastName,
-    email,
-    password,
-    confirmPassword,
-    image,
-    city: "No city added",
-    bio: "No bio added",
+  User.findOne({ email: req.body.email }).then((data) => {
+    if (data !== null) {
+      // console.log(data);
+      res
+        .status(409)
+        .json({ message: "User with email provided already exists" });
+    }
+    if (data === null) {
+      // console.log(data);
+      const user = new User({
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword,
+        image,
+        city: "No city added",
+        bio: "No bio added",
+      });
+      user
+        .save()
+        .then((user) => {
+          console.log("User created, id:", user._id.toString());
+          res.status(201).json({ message: "User created. Please login." });
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(400).json({ message: "Something went wrong" });
+        });
+    }
   });
-  user
-    .save()
-    .then((user) => {
-      console.log("User created, id:", user._id.toString());
-      res.status(201).json({ message: "User created. Please login." });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(400).json({ message: "Something went wrong" });
-    });
 };
 
 const getAllUsers = async (req, res) => {
@@ -65,6 +77,17 @@ const updateUserById = async (req, res) => {
   if (!req.body.bio) {
     req.body.bio = "No bio added";
   }
+
+  await Post.updateMany(
+    { userId: req.body.user_id },
+    {
+      $set: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        image: req.body.image,
+      },
+    }
+  );
 
   const updatedUser = await User.findOneAndUpdate(
     { _id: req.body.user_id },

@@ -22,7 +22,7 @@ export const FeedPage = () => {
         .then((data) => {
           const sortedPosts = data.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
           setPosts(sortedPosts);
-          localStorage.setItem("token", data.token); 
+          localStorage.setItem("token", data.token);
         })
         .catch((err) => {
           console.error(err);
@@ -38,7 +38,7 @@ export const FeedPage = () => {
       return;
     }
     fetchPosts();
-  },[]); 
+  },[]);
 
 
   return (
@@ -48,11 +48,11 @@ export const FeedPage = () => {
       <Container justifyContent="center" className="feed" role="feed" sx={{width: '100vh' }}>
       <Box justifyContent="center" className="feed" role="feed" >
       {posts.map((post) => (
-          <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId} firstName={post.firstName} lastName={post.lastName}/>
+          <Post post={post} key={post._id} likes={post.likes} date={post.date} userId={post.userId} firstName={post.firstName} lastName={post.lastName} image={post.image} data={post.date}/>
         ))}
       </Box>
       </Container>
-      
+
     </>
   );
 }
