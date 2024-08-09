@@ -122,10 +122,15 @@ Then, after signing up, you should be able to log in by going to
 After logging in, you won't see much but you can create posts using PostMan and
 they should then show up in the browser if you refresh the page.
 
-
-## Adding lines and pushing to check connection to remote repo - Maz
-
-### Frontend Dependencies
+# Frontend Dependencies
+<pre>
 npm install --save-dev @testing-library/jest-dom
 npm install jwt-decode
 npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+</pre>
+
+# Trello Board Link
+<pre>
+https://trello.com/b/eBLGPxZi/team-fire
+</pre>
+
