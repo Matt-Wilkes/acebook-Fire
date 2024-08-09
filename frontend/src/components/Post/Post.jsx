@@ -16,10 +16,11 @@ import Collapse from "@mui/material/Collapse";
 import { styled } from "@mui/material/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CreateComment from "../CreateComment/CreateComment";
-
+import Comment from "../Comment/Comment";
 
 const Post = (props) => {
   const [likes, setLikes] = useState(props.likes);
+  const [comments, setComments] = useState(props.comments);
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -33,8 +34,8 @@ const Post = (props) => {
     transform: !expand ? "rotate(0deg)" : "rotateY(180deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
+      duration: theme.transitions.duration.shortest,
+    }),
   }));
 
   const handleLike = async () => {
@@ -46,10 +47,22 @@ const Post = (props) => {
       setLikes([...likes, userId]);
     }
   };
+
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     updatePost(token, { id: props.post._id, likes: likes });
   }, [likes]);
+
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+    console.log(comments);
+  },[]); 
 
   const formatDate = (date) => {
     const options = {
@@ -68,7 +81,7 @@ const Post = (props) => {
     <Card
       key={props.post._id}
       sx={{
-        width: "90vh",
+        width: "95%",
         margin: "0 auto",
         padding: "0.1em",
         mt: 3,
@@ -101,15 +114,28 @@ const Post = (props) => {
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
+          
         >
           <Button>
-          <AddCommentIcon/>
-        </Button>
+            <AddCommentIcon />{comments !== 0 && comments.length}
+          </Button>
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <CreateComment post_id={props.post._id}/>
+          <CreateComment post_id={props.post._id} />
+          {comments.map((comment) => {
+            return (
+              <Comment
+              message={comment.message}
+              id={comment._id}
+              date={comment.date}
+              firstName={comment.firstName}
+              lastName={comment.lastName}
+            />
+            )
+            
+          })}
         </CardContent>
       </Collapse>
     </Card>

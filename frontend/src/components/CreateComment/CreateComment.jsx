@@ -16,46 +16,46 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Button, CardActions } from "@mui/material";
 
-
 export const CreateComment = (props) => {
+  const [comment, setComment] = useState({
+    message: "",
+    userId: "",
+  });
 
-    const [comment, setComment] = useState({
-        message: "",
-        userId: "",
-      });
-    
-      const handleCommentChange = (event) => {
-        const token = localStorage.getItem("token");
-        setComment({
-          ...comment,
-          message: event.target.value,
-          userId: jwtDecode(token).user_id,
-        });
-      };
-  
-  
+  const handleCommentChange = (event) => {
+    const token = localStorage.getItem("token");
+    setComment({
+      ...comment,
+      message: event.target.value,
+      userId: jwtDecode(token).user_id,
+    });
+  };
+
   const handleSubmit = async (event) => {
-      const token = localStorage.getItem("token");
-      event.preventDefault();
-      if (token) {
-        try {
+    const token = localStorage.getItem("token");
+    event.preventDefault();
+    if (token) {
+      try {
         //   await updatePostComments(token, comment);
-          await updatePostComments(token, { id: props.post_id, comment: comment })
-        //   props.fetchPosts(); need something to fetch comments?
-        //   setComment({ message: "", userId: ""});
-        } catch (err) {
-          console.error(err);
-        }
+        await updatePostComments(token, {
+          id: props.post_id,
+          comment: comment,
+        });
+        props.fetchPosts();
+        setComment({ message: "", userId: "" });
+      } catch (err) {
+        console.error(err);
       }
-  }
+    }
+  };
 
-    return (
-<Card
+  return (
+    <Card
       sx={{
-        width: "90vh",
+        width: "100%",
         margin: "0 auto",
         padding: "0.1em",
-        mt: 3,
+        mt: 1,
       }}
     >
       <CardContent component="form" id="comment-form" onSubmit={handleSubmit}>
@@ -74,7 +74,6 @@ export const CreateComment = (props) => {
           onChange={handleCommentChange}
           multiline
           rows={2}
-          // sx={{ mb: 3 }}
         />
       </CardContent>
       <CardActions sx={{ display: "flex", justifyContent: "right", mr: 1.3 }}>
@@ -88,7 +87,7 @@ export const CreateComment = (props) => {
         </Button>
       </CardActions>
     </Card>
-    )
+  );
 };
 
 export default CreateComment;
