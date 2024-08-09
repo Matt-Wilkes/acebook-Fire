@@ -59,7 +59,7 @@ export const HomePage = () => {
 
       {authStatus && (
         <>
-          <h2 data-testid="_my-profile">Daily Classics</h2>
+          <h2 data-testid="_my-profile">Daily Zen</h2>
           <Card
             raised
             sx={{
@@ -74,17 +74,17 @@ export const HomePage = () => {
               <iframe
                 width="560"
                 height="315"
-                src="https://www.youtube.com/embed/YVkUvmDQ3HY?si=lNj9udZn13cUSp2F"
+                src="https://www.youtube.com/embed/L_LUpnjgPso?si=3o8dhlSsEqPKaPaD&amp;controls=0"
                 title="YouTube video player"
                 frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+
+              </iframe>
             </CardMedia>
             <CardContent>
               <Typography gutterBottom variant="h5" data-testid="_full-name">
-                Eminem - Without Me
+                10 Hours Fire Loop
               </Typography>
             </CardContent>
           </Card>
