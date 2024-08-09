@@ -2,8 +2,11 @@ const User = require("../models/user");
 const Post = require("../models/post");
 
 const create = (req, res) => {
-  const { firstName, lastName, email, password, confirmPassword, image } =
-    req.body;
+  // const { firstName, lastName, email, password, confirmPassword, image } =
+  //   req.body;
+  if (req.body.image === "") {
+    req.body.image = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+  }
 
   User.findOne({ email: req.body.email }).then((data) => {
     if (data !== null) {
@@ -15,12 +18,12 @@ const create = (req, res) => {
     if (data === null) {
       // console.log(data);
       const user = new User({
-        firstName,
-        lastName,
-        email,
-        password,
-        confirmPassword,
-        image,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        confirmPassword: req.body.confirmPassword,
+        image: req.body.image,
         city: "No city added",
         bio: "No bio added",
       });
