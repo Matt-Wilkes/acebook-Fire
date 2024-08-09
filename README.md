@@ -1,4 +1,4 @@
-## Acebook MERN Template
+## Acebook MERN Team Fire
 
 In this project, you are task with working on an existing application. A
 significant part of the challenge will be to familiarise yourself with the
@@ -21,9 +21,15 @@ It's recommended you all read the suggested docs _after making sure the whole
 setup below worked for everyone_. Then work together on a diagram describing how
 the application works.
 
-### Card wall
+# Trello Board Link
+<pre>
+<a href="https://trello.com/b/eBLGPxZi/team-fire">https://trello.com/b/eBLGPxZi/team-fire</a>
+</pre>
 
-REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
+# Our Team Charter
+<pre>
+<a href="https://docs.google.com/document/d/15HFLSRdf2pgC2OFtfBmkO-UOcn3_EzKDcXshysDY_fI/edit">Our Team Charter Link</a>
+</pre>
 
 ### Quickstart
 
@@ -127,10 +133,5 @@ they should then show up in the browser if you refresh the page.
 npm install --save-dev @testing-library/jest-dom
 npm install jwt-decode
 npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
-</pre>
-
-# Trello Board Link
-<pre>
-https://trello.com/b/eBLGPxZi/team-fire
 </pre>
 
