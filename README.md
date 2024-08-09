@@ -137,10 +137,10 @@ npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
 
 ## Diagrams
 ### Git Flow:
-<img src='https://i.ibb.co/xXBHv3q/Screenshot-2024-08-09-at-14-08-37.png' width=60%>
+<img src='https://i.ibb.co/xXBHv3q/Screenshot-2024-08-09-at-14-08-37.png' width=80%>
 <br/>
 
 ### ERD:
-<img src='https://i.ibb.co/vZwr5kr/Screenshot-2024-08-09-at-14-02-50.png' width=60%>
+<img src='https://i.ibb.co/vZwr5kr/Screenshot-2024-08-09-at-14-02-50.png' width=80%>
 
 
