@@ -135,3 +135,12 @@ npm install jwt-decode
 npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
 </pre>
 
+## Diagrams
+### Git Flow:
+<img src='https://i.ibb.co/xXBHv3q/Screenshot-2024-08-09-at-14-08-37.png' width=60%>
+<br/>
+
+### ERD:
+<img src='https://i.ibb.co/vZwr5kr/Screenshot-2024-08-09-at-14-02-50.png' width=60%>
+
+
